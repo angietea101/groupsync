@@ -1,0 +1,30 @@
+/* -----------------------------------------
+   GLOBAL DESIGN TOKENS / VARIABLES
+----------------------------------------- */
+:root {
+  /* Brand Colors */
+  --color-primary: #da7756;
+  --color-primary-hover: #c76545;
+
+  /* Background + Text */
+  --color-bg: #eeece2;
+  --color-text: #222222;
+
+  /* Neutral Colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Spacing Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+
+  /* Font sizes */
+  --font-sm: 0.875rem;
+  --font-md: 1rem;
+  --font-lg: 1.5rem;
+  --font-xl: 2.5rem;
+  --font-xxl: 3rem;
+}

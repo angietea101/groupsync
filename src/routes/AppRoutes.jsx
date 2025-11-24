@@ -6,6 +6,7 @@ export default function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/signin" element={<h2>Sign In Page</h2>} />
       </Routes>
     </BrowserRouter>
   );
