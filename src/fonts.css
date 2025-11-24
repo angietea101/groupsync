@@ -1,0 +1,26 @@
+/* Regular */
+@font-face {
+  font-family: 'StyreneA';
+  src: url('./fonts/StyreneA-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Medium */
+@font-face {
+  font-family: 'StyreneA';
+  src: url('./fonts/StyreneA-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'StyreneA';
+  src: url('./fonts/StyreneA-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
