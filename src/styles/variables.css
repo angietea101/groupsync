@@ -2,8 +2,11 @@
    GLOBAL DESIGN TOKENS / VARIABLES
 ----------------------------------------- */
 :root {
+  --radius-btn: 12px;
+
   /* Brand Colors */
   --color-primary: #da7756;
+  --color-primary-dark: #bd5d3a;
   --color-primary-hover: #c76545;
 
   /* Background + Text */
@@ -20,11 +23,12 @@
   --space-md: 1rem;
   --space-lg: 2rem;
   --space-xl: 4rem;
+  --space-xxl: 6rem;
 
   /* Font sizes */
   --font-sm: 0.875rem;
   --font-md: 1rem;
   --font-lg: 1.5rem;
   --font-xl: 2.5rem;
-  --font-xxl: 3rem;
+  --font-xxl: 4rem;
 }

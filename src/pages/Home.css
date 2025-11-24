@@ -1,0 +1,183 @@
+/* Import global variables */
+@import '../styles/variables.css';
+
+.text-primary {
+  color: var(--color-primary-dark);
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+/* Container */
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-xxl);
+  background-color: var(--color-white);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  background-color: var(--color-bg);
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+.logo-text {
+  font-weight: bold;
+  font-size: var(--font-lg);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo-accent {
+  color: var(--color-primary);
+}
+
+/* NAV ITEMS */
+.navbar-center a {
+  margin: 0 var(--space-md);
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navbar-center a:hover {
+  color: var(--color-primary);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.sign-in {
+  margin-right: var(--space-md);
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.sign-in:hover {
+  color: var(--color-primary);
+}
+
+/* GET STARTED BUTTON */
+.get-started {
+  padding: 0.75rem 1rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.get-started:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* HERO SECTION */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-grow: 1;
+  padding: var(--space-xl) var(--space-lg);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: var(--font-xxl);
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+  max-width: 600px;
+}
+
+.hero p {
+  font-size: var(--font-lg);
+  margin-bottom: var(--space-lg);
+  max-width: 650px;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+/* HERO BUTTONS */
+.hero-buttons {
+  display: flex;
+  gap: var(--space-xl);
+  margin-top: var(--space-sm);
+}
+
+.hero-buttons button {
+  padding: 0.75rem 2.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  font-size: var(--font-md);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.hero-buttons button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.hero-buttons .watch-demo {
+  background: none !important;
+  border: none !important;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: var(--font-md);
+  cursor: pointer;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-buttons .watch-demo:hover {
+  text-decoration: underline;
+  background: none;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  .navbar-center {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: var(--font-sm);
+  }
+}

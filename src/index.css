@@ -47,7 +47,7 @@ button {
   background-color: var(--color-primary);
   color: var(--color-white);
   border: none;
-  border-radius: 4px;
+  border-radius: var(--radius-btn);
   transition: background-color 0.2s ease;
 }
 
