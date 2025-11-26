@@ -1,4 +1,3 @@
-/* Import global variables */
 @import '../styles/variables.css';
 
 .text-primary {
@@ -19,13 +18,13 @@
 
 /* NAVBAR */
 .navbar {
+  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-md) var(--space-xxl);
-  background-color: var(--color-white);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  padding: 0 var(--space-xxl);
   background-color: var(--color-bg);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .navbar-left {
@@ -100,15 +99,13 @@
 
 /* HERO SECTION */
 .hero {
+  min-height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  text-align: center;
-  flex-grow: 1;
-  padding: var(--space-xl) var(--space-lg);
+  align-items: center;
+  padding: var(--space-xxl) var(--space-lg);
   width: 100%;
-  margin: 0 auto;
 }
 
 .hero h1 {
@@ -117,6 +114,7 @@
   margin-bottom: var(--space-md);
   color: var(--color-text);
   max-width: 600px;
+  text-align: center;
 }
 
 .hero p {
@@ -125,6 +123,7 @@
   max-width: 650px;
   line-height: 1.6;
   color: var(--color-text);
+  text-align: center;
 }
 
 /* HERO BUTTONS */
@@ -167,6 +166,65 @@
   background: none;
 }
 
+/* FEATURES SECTION */
+.features {
+  width: 100%;
+  padding: var(--space-xxxl) var(--space-lg);
+  text-align: center;
+  background-color: var(--color-primary-light);
+  margin-top: var(--space-xl);
+}
+
+.features-title {
+  font-size: var(--font-xxl);
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text);
+}
+
+.features-subtitle {
+  font-size: var(--font-lg);
+  color: var(--color-text-light);
+  max-width: 800px;
+  margin: 0 auto var(--space-xl);
+  line-height: 1.5;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-lg);
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: var(--space-md);
+}
+
+.feature-item h3 {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+}
+
+.feature-item p {
+  font-size: var(--font-md);
+  line-height: 1.6;
+  color: var(--color-text);
+  max-width: 350px;
+}
+
 /* MOBILE */
 @media (max-width: 700px) {
   .navbar-center {
@@ -179,5 +237,10 @@
 
   .hero p {
     font-size: var(--font-sm);
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
   }
 }

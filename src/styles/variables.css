@@ -7,6 +7,7 @@
   /* Brand Colors */
   --color-primary: #da7756;
   --color-primary-dark: #bd5d3a;
+  --color-primary-light: #f0efe9;
   --color-primary-hover: #c76545;
 
   /* Background + Text */
@@ -24,6 +25,7 @@
   --space-lg: 2rem;
   --space-xl: 4rem;
   --space-xxl: 6rem;
+  --space-xxxl: 8rem;
 
   /* Font sizes */
   --font-sm: 0.875rem;
