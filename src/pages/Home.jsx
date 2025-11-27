@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
+import Navbar from '../components/Navbar';
+
 import WatchIcon from '../assets/watch-icon.svg';
 import SchedulingIcon from '../assets/scheduling.svg';
 import VoteIcon from '../assets/vote.svg';
@@ -10,27 +12,7 @@ export default function Home() {
   return (
     <div className="home-container">
       {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="navbar-left">
-          <img src="/logo.png" alt="GroupSync Logo" className="logo" />
-          <span className="logo-text">
-            Group<span className="logo-accent">Sync</span>
-          </span>
-        </div>
-
-        <div className="navbar-center">
-          <a href="#features">Features</a>
-          <a href="#how-it-works">How it Works</a>
-          <a href="#team">Team</a>
-        </div>
-
-        <div className="navbar-right">
-          <Link to="/signin" className="sign-in">
-            Sign In
-          </Link>
-          <button className="get-started">Get Started</button>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* HERO SECTION */}
       <section className="hero">
