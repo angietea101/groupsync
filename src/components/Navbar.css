@@ -34,6 +34,14 @@
   text-decoration: none;
   color: var(--color-text);
   font-weight: 500;
+  transition:
+    color 0.2s ease,
+    text-decoration 0.2s ease;
+}
+
+.navbar-center a:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
 }
 
 .navbar-right {
