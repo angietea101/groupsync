@@ -5,6 +5,9 @@
   padding: var(--space-md) var(--space-xxl);
   background-color: var(--color-bg);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .navbar-left {
@@ -30,22 +33,65 @@
 }
 
 .navbar-center a {
+  position: relative;
   margin: 0 var(--space-md);
   text-decoration: none;
   color: var(--color-text);
   font-weight: 500;
-  transition:
-    color 0.2s ease,
-    text-decoration 0.2s ease;
+  padding-bottom: 3px;
+  transition: color 0.25s ease;
+}
+
+.navbar-center a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width 0.3s ease;
 }
 
 .navbar-center a:hover {
   color: var(--color-primary);
-  text-decoration: underline;
+}
+
+.navbar-center a:hover::after {
+  width: 100%;
 }
 
 .navbar-right {
   display: flex;
   align-items: center;
   gap: var(--space-lg);
+}
+
+.sign-in {
+  position: relative;
+  margin-right: var(--space-md);
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+  transition: color 0.25s ease;
+  padding-bottom: 3px;
+}
+
+.sign-in::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+.sign-in:hover {
+  color: var(--color-primary);
+}
+
+.sign-in:hover::after {
+  width: 100%;
 }
