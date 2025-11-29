@@ -1,0 +1,53 @@
+@import '../styles/variables.css';
+
+.footer {
+  width: 100%;
+  padding: var(--space-lg) var(--space-xxl);
+  background-color: var(--color-primary-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-xxl);
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.footer-logo {
+  width: 38px;
+  height: 38px;
+}
+
+.footer-text {
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.footer-right a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.footer-right a:hover {
+  opacity: 0.6;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .footer {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+}

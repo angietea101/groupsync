@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 import WatchIcon from '../assets/watch-icon.svg';
 import SchedulingIcon from '../assets/scheduling.svg';
@@ -120,6 +121,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 }
