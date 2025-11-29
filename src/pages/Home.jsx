@@ -7,6 +7,9 @@ import WatchIcon from '../assets/watch-icon.svg';
 import SchedulingIcon from '../assets/scheduling.svg';
 import VoteIcon from '../assets/vote.svg';
 import ShareIcon from '../assets/share.svg';
+import PlusIcon from '../assets/plus.svg';
+import GroupIcon from '../assets/group.svg';
+import CheckmarkIcon from '../assets/checkmark.svg';
 
 export default function Home() {
   return (
@@ -65,6 +68,55 @@ export default function Home() {
               Send invite links instantly. No accounts needed for participants — just like
               when2meet, but better.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS SECTION */}
+      <section className="works">
+        <h2 className="features-title">How it Works</h2>
+        <p className="features-subtitle">Three simple steps to organize the perfect group event.</p>
+
+        <div className="features-grid">
+          <div className="feature-item">
+            <div className="works-icon">1</div>
+            <h3>Create Event</h3>
+            <p>
+              Set up your event with dates and times. Add a description and any initial activity
+              ideas.
+            </p>
+
+            <div className="works-outer-rect">
+              <div className="works-inner-rect">
+                <img src={PlusIcon} alt="Icon" className="works-rect-icon" />
+              </div>
+            </div>
+          </div>
+
+          <div className="feature-item">
+            <div className="works-icon">2</div>
+            <h3>Share & Collect</h3>
+            <p>
+              Send the link to friends. They mark availability and suggest activities to vote on.
+            </p>
+
+            <div className="works-outer-rect">
+              <div className="works-inner-rect">
+                <img src={GroupIcon} alt="Icon" className="works-rect-icon" />
+              </div>
+            </div>
+          </div>
+
+          <div className="feature-item">
+            <div className="works-icon">3</div>
+            <h3>Vote & Plan</h3>
+            <p>Everyone votes on activities and times. The best option wins automatically.</p>
+
+            <div className="works-outer-rect">
+              <div className="works-inner-rect">
+                <img src={CheckmarkIcon} alt="Icon" className="works-rect-icon" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
