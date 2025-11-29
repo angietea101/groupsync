@@ -37,7 +37,7 @@ export default function Home() {
       </section>
 
       {/* FEATURES SECTION */}
-      <section className="features">
+      <section id="features" className="features">
         <h2 className="features-title">Everything you need</h2>
         <p className="features-subtitle">
           Powerful features that make group event planning effortless and enjoyable
@@ -74,7 +74,7 @@ export default function Home() {
       </section>
 
       {/* HOW IT WORKS SECTION */}
-      <section className="works">
+      <section id="how-it-works" className="works">
         <h2 className="features-title">How it Works</h2>
         <p className="features-subtitle">Three simple steps to organize the perfect group event.</p>
 

@@ -5,12 +5,18 @@ import './Footer.css';
 export default function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-left">
+      <Link
+        to="/"
+        className="footer-left"
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      >
         <img src="/logo.png" alt="GroupSync Logo" className="logo" />
         <span className="footer-text">
           Group<span className="logo-accent">Sync</span>
         </span>
-      </div>
+      </Link>
 
       <div className="footer-right">
         <Link to="/privacy">Privacy</Link>

@@ -70,3 +70,7 @@ span.medium {
   font-family: 'StyreneA';
   font-weight: 500; /* Medium */
 }
+
+html {
+  scroll-behavior: smooth;
+}

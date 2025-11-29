@@ -6,10 +6,18 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <img src="/logo.png" alt="GroupSync Logo" className="logo" />
-        <span className="logo-text">
-          Group<span className="logo-accent">Sync</span>
-        </span>
+        <Link
+          to="/"
+          className="logo-link"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        >
+          <img src="/logo.png" alt="GroupSync Logo" className="logo" />
+          <span className="logo-text">
+            Group<span className="logo-accent">Sync</span>
+          </span>
+        </Link>
       </div>
 
       <div className="navbar-center">
