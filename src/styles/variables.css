@@ -9,6 +9,8 @@
   --color-primary-dark: #bd5d3a;
   --color-primary-light: #f0efe9;
   --color-primary-hover: #c76545;
+  --color-border: #999587;
+  --color-dark-green: #3d3929;
 
   /* Background + Text */
   --color-bg: #eeece2;
@@ -17,6 +19,7 @@
   /* Neutral Colors */
   --color-white: #ffffff;
   --color-black: #000000;
+  --color-dark-gray: #3d3929;
 
   /* Spacing Scale */
   --space-xs: 0.25rem;

@@ -30,7 +30,9 @@ export default function Navbar() {
         <Link to="/signin" className="sign-in">
           Sign In
         </Link>
-        <button className="get-started">Get Started</button>
+        <Link to="/createaccount">
+          <button className="get-started">Get Started</button>
+        </Link>
       </div>
     </nav>
   );
