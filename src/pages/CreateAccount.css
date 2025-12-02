@@ -145,19 +145,27 @@
 .social-btn {
   flex: 1;
   height: 3.5rem;
-  padding: var(--space-md);
+  padding: 0;
   border-radius: 12px;
   border: 1px solid var(--color-border);
   background: transparent;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  color: var(--color-dark-gray);
   transition: 0.2s ease;
 }
 
 .social-btn:hover {
   background: var(--color-dark-green);
   color: var(--color-bg);
+}
+
+.social-btn img {
+  width: 20px;
+  height: 20px;
+  display: block;
+  margin: 0 auto;
 }
 
 .signin-text {
