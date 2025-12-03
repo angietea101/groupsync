@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import GoogleIcon from '../assets/google.svg?react';
 import AppleIcon from '../assets/apple.svg?react';
 import GitHubIcon from '../assets/github.svg?react';
+import Footer from '../components/Footer';
 
 export default function CreateAccount() {
   return (
@@ -65,6 +66,8 @@ export default function CreateAccount() {
           </p>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }
