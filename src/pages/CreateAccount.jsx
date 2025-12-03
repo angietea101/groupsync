@@ -1,5 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth, db } from '../services/firebase';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+
 import './CreateAccount.css';
 import Navbar from '../components/Navbar';
 import GoogleIcon from '../assets/google.svg?react';
@@ -8,6 +12,56 @@ import GitHubIcon from '../assets/github.svg?react';
 import Footer from '../components/Footer';
 
 export default function CreateAccount() {
+  const navigate = useNavigate();
+
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [agree, setAgree] = useState(false);
+
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  async function handleCreateAccount() {
+    if (!fullName || !email || !password) {
+      setError('Please fill out all fields.');
+      return;
+    }
+
+    if (!agree) {
+      setError('You must agree to the Terms & Privacy Policy.');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError('');
+
+      // Create Firebase Auth user
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+
+      // Set display name in Firebase Auth
+      await updateProfile(res.user, {
+        displayName: fullName,
+      });
+
+      // Create Firestore user document
+      await setDoc(doc(db, 'users', res.user.uid), {
+        uid: res.user.uid,
+        fullName,
+        email,
+        createdAt: new Date(),
+      });
+
+      // Redirect to dashboard
+      navigate('/viewevents');
+    } catch (err) {
+      setError(err.message);
+    }
+
+    setLoading(false);
+  }
+
   return (
     <>
       <Navbar />
@@ -15,18 +69,37 @@ export default function CreateAccount() {
       <div className="create-container">
         <div className="create-card">
           <h1 className="title">Create Account</h1>
-
           <label>Full Name</label>
-          <input type="text" placeholder="John Doe" />
+          <input
+            type="text"
+            placeholder="John Doe"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+          />
 
           <label>Email Address</label>
-          <input type="email" placeholder="john@example.com" />
+          <input
+            type="email"
+            placeholder="john@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
           <label>Password</label>
-          <input type="password" placeholder="Enter your password" />
+          <input
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
           <div className="checkbox-row">
-            <input type="checkbox" id="agree" />
+            <input
+              type="checkbox"
+              id="agree"
+              checked={agree}
+              onChange={(e) => setAgree(e.target.checked)}
+            />
 
             <label htmlFor="agree" className="agree-text">
               <span className="thin">I agree to the </span>
@@ -40,7 +113,11 @@ export default function CreateAccount() {
             </label>
           </div>
 
-          <button className="create-btn">Create Account</button>
+          {error && <p className="error-msg">{error}</p>}
+
+          <button className="create-btn" onClick={handleCreateAccount} disabled={loading}>
+            {loading ? 'Creating...' : 'Create Account'}
+          </button>
 
           <div className="divider">
             <span>or continue with</span>

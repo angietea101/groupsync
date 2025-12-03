@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from '../services/firebase';
 import './Navbar.css';
 
 export default function Navbar() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged((u) => {
+      setUser(u);
+    });
+
+    return () => unsub();
+  }, []);
+
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -27,12 +38,27 @@ export default function Navbar() {
       </div>
 
       <div className="navbar-right">
-        <Link to="/signin" className="sign-in">
-          Sign In
-        </Link>
-        <Link to="/createaccount">
-          <button className="get-started">Get Started</button>
-        </Link>
+        {!user ? (
+          <>
+            {/* Logged OUT */}
+            <Link to="/signin" className="sign-in">
+              Sign In
+            </Link>
+            <Link to="/createaccount">
+              <button className="get-started">Get Started</button>
+            </Link>
+          </>
+        ) : (
+          <>
+            {/* Logged IN */}
+            <Link to="/viewevents" className="sign-in">
+              View Events
+            </Link>
+            <Link to="/plan">
+              <button className="get-started">Plan Events</button>
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );

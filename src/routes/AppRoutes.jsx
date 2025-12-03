@@ -2,6 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import SignIn from '../pages/SignIn';
 import CreateAccount from '../pages/CreateAccount';
+import ViewEvents from '../pages/ViewEvents';
+import Plan from '../pages/Plan';
+
 import ScrollToHash from '../components/ScrollToHash';
 
 export default function AppRoutes() {
@@ -12,6 +15,8 @@ export default function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/createaccount" element={<CreateAccount />} />
+        <Route path="/viewevents" element={<ViewEvents />} />
+        <Route path="/plan" element={<Plan />} />
       </Routes>
     </BrowserRouter>
   );
