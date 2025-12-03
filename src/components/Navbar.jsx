@@ -21,9 +21,9 @@ export default function Navbar() {
       </div>
 
       <div className="navbar-center">
-        <a href="#features">Features</a>
-        <a href="#how-it-works">How it Works</a>
-        <a href="#team">Team</a>
+        <Link to="/#features">Features</Link>
+        <Link to="/#how-it-works">How it Works</Link>
+        <Link to="/#team">Team</Link>
       </div>
 
       <div className="navbar-right">
