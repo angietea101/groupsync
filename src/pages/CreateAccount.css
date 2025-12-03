@@ -1,11 +1,13 @@
 /* Entire area under navbar */
 .create-container {
-  height: calc(100vh - 80px);
+  min-height: calc(90vh - 80px);
   display: flex;
   justify-content: center;
   align-items: center;
   background: transparent;
   overflow: hidden;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 /* Main card */
