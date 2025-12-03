@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './CreateAccount.css';
 import Navbar from '../components/Navbar';
-import GoogleIcon from '../assets/google.svg';
-import AppleIcon from '../assets/apple.svg';
-import GitHubIcon from '../assets/github.svg';
+import GoogleIcon from '../assets/google.svg?react';
+import AppleIcon from '../assets/apple.svg?react';
+import GitHubIcon from '../assets/github.svg?react';
 
 export default function CreateAccount() {
   return (
@@ -46,16 +46,16 @@ export default function CreateAccount() {
           </div>
 
           <div className="social-buttons">
-            <button className="social-btn google">
-              <img src={GoogleIcon} alt="Google" />
+            <button className="social-btn">
+              <GoogleIcon className="icon" />
             </button>
 
-            <button className="social-btn apple">
-              <img src={AppleIcon} alt="Apple" />
+            <button className="social-btn">
+              <AppleIcon className="icon" />
             </button>
 
-            <button className="social-btn discord">
-              <img src={GitHubIcon} alt="Discord" />
+            <button className="social-btn">
+              <GitHubIcon className="icon" />
             </button>
           </div>
 

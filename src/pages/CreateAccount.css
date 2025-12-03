@@ -154,11 +154,23 @@
   justify-content: center;
   cursor: pointer;
   transition: 0.2s ease;
+  color: var(--color-dark-green);
 }
 
 .social-btn:hover {
   background: var(--color-dark-green);
   color: var(--color-bg);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  fill: var(--color-dark-green);
+  transition: fill 0.2s ease;
+}
+
+.social-btn:hover .icon {
+  fill: var(--color-bg);
 }
 
 .social-btn img {
