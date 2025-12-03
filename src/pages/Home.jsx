@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom';
 import './Home.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { Calendar, Vote, Share2 } from 'lucide-react';
 
 import WatchIcon from '../assets/watch-icon.svg';
-import SchedulingIcon from '../assets/scheduling.svg';
-import VoteIcon from '../assets/vote.svg';
-import ShareIcon from '../assets/share.svg';
 import PlusIcon from '../assets/plus.svg';
 import GroupIcon from '../assets/group.svg';
 import CheckmarkIcon from '../assets/checkmark.svg';
@@ -45,7 +43,9 @@ export default function Home() {
 
         <div className="features-grid">
           <div className="feature-item">
-            <img src={SchedulingIcon} alt="Scheduling Icon" className="feature-icon" />
+            <div className="feature-icon-container">
+              <Calendar className="feature-icon" size={40} strokeWidth={1.5} />
+            </div>
             <h3>Scheduling</h3>
             <p>
               Share availability with visual grids. Find the perfect time that works for everyone
@@ -54,7 +54,9 @@ export default function Home() {
           </div>
 
           <div className="feature-item">
-            <img src={VoteIcon} alt="Group Vote Icon" className="feature-icon" />
+            <div className="feature-icon-container">
+              <Vote className="feature-icon" size={40} strokeWidth={1.5} />
+            </div>
             <h3>Group Vote</h3>
             <p>
               Propose activities and let everyone vote. Democracy meets event planning for better
@@ -63,7 +65,9 @@ export default function Home() {
           </div>
 
           <div className="feature-item">
-            <img src={ShareIcon} alt="Easy Sharing Icon" className="feature-icon" />
+            <div className="feature-icon-container">
+              <Share2 className="feature-icon" size={40} strokeWidth={1.5} />
+            </div>
             <h3>Easy Sharing</h3>
             <p>
               Send invite links instantly. No accounts needed for participants — just like
