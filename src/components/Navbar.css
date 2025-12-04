@@ -4,7 +4,7 @@
   z-index: 999;
   background-color: var(--color-bg);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  padding: 0; 
+  padding: 0;
 }
 
 .navbar-container {
@@ -16,7 +16,7 @@
   margin: 0 auto;
   background-color: var(--color-bg);
   position: relative;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 .navbar-left {
@@ -102,13 +102,16 @@
   left: 0;
   right: 0;
   background-color: var(--color-bg);
-  border-top: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   padding: 0;
   overflow: hidden;
   max-height: 0;
   opacity: 0;
-  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease;
+  transition:
+    max-height 0.3s ease-in-out,
+    opacity 0.3s ease-in-out,
+    padding 0.3s ease;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -211,11 +214,11 @@
   .mobile-menu-icon {
     display: block;
   }
-  
+
   .navbar-container {
-    padding: var(--space-md) var(--space-md);
+    padding: var(--space-md) var(--space-lg);
   }
-  
+
   .mobile-menu.active {
     padding: 1.5rem var(--space-md);
   }

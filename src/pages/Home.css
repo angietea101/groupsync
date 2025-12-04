@@ -104,7 +104,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: var(--space-xxl) var(--space-lg);
+  padding: var(--space-xxl) var(--space-xl);
   width: 100%;
 }
 
@@ -169,7 +169,7 @@
 /* FEATURES SECTION */
 .features {
   width: 100%;
-  padding: var(--space-xxxl) var(--space-lg);
+  padding: var(--space-xxxl) var(--space-xl);
   text-align: center;
   background-color: var(--color-primary-light);
   margin-top: var(--space-xl);
@@ -240,7 +240,7 @@
 .works {
   min-height: calc(100vh - 80px);
   width: 100%;
-  padding: var(--space-xxxl) var(--space-lg);
+  padding: var(--space-xxxl) var(--space-xl);
   text-align: center;
   background-color: var(--color-bg);
   margin-top: var(--space-xl);
@@ -295,11 +295,11 @@
   }
 
   .hero h1 {
-    font-size: 2rem;
+    font-size: var(--font-xl);
   }
 
   .hero p {
-    font-size: var(--font-sm);
+    font-size: var(--font-md);
   }
 
   .features-grid {
