@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import Navbar from '../components/Navbar';
@@ -11,6 +11,36 @@ import GroupIcon from '../assets/group.svg';
 import CheckmarkIcon from '../assets/checkmark.svg';
 
 export default function Home() {
+  const [isVisible, setIsVisible] = useState({
+    hero: false,
+    features: false,
+    works: false
+  });
+
+  useEffect(() => {
+    setTimeout(() => setIsVisible(prev => ({ ...prev, hero: true })), 100);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const section = entry.target.getAttribute('data-section');
+            setIsVisible(prev => ({ ...prev, [section]: true }));
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const featuresSection = document.querySelector('[data-section="features"]');
+    const worksSection = document.querySelector('[data-section="works"]');
+
+    if (featuresSection) observer.observe(featuresSection);
+    if (worksSection) observer.observe(worksSection);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="home-container">
       {/* NAVBAR */}
@@ -18,16 +48,18 @@ export default function Home() {
 
       {/* HERO SECTION */}
       <section className="hero">
-        <h1>
+        <h1 className={isVisible.hero ? 'animate-fade-in-down' : 'animation-ready'}>
           Find time. <span className="text-primary">Vote on ideas.</span> Make it happen.
         </h1>
-        <p>
+        <p className={isVisible.hero ? 'animate-fade-in-up' : 'animation-ready'}>
           Coordinate schedules, propose activities, and vote on the perfect plan. Making group
           decisions has never been this simple.
         </p>
         <div className="hero-buttons">
-          <button className="start-planning">Start Planning</button>
-          <button className="watch-demo">
+          <button className={`start-planning button-hover ${isVisible.hero ? 'animate-slide-in-left' : 'animation-ready'}`}>
+            Start Planning
+          </button>
+          <button className={`watch-demo ${isVisible.hero ? 'animate-slide-in-right' : 'animation-ready'}`}>
             <img src={WatchIcon} alt="Watch icon" className="watch-icon" />
             Watch Demo
           </button>
@@ -35,14 +67,20 @@ export default function Home() {
       </section>
 
       {/* FEATURES SECTION */}
-      <section id="features" className="features">
-        <h2 className="features-title">Everything you need</h2>
-        <p className="features-subtitle">
+      <section
+        id="features"
+        className={`features ${isVisible.features ? 'section-visible' : ''}`}
+        data-section="features"
+      >
+        <h2 className={`features-title ${isVisible.features ? 'animate-fade-in-up' : 'animation-ready'}`}>
+          Everything you need
+        </h2>
+        <p className={`features-subtitle ${isVisible.features ? 'animate-fade-in-up animation-delay-100' : 'animation-ready'}`}>
           Powerful features that make group event planning effortless and enjoyable
         </p>
 
         <div className="features-grid">
-          <div className="feature-item">
+          <div className={`feature-item hover-lift ${isVisible.features ? 'animate-scale-in animation-delay-200' : 'animation-ready'}`}>
             <div className="feature-icon-container">
               <Calendar className="feature-icon" size={40} strokeWidth={1.5} />
             </div>
@@ -53,7 +91,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="feature-item">
+          <div className={`feature-item hover-lift ${isVisible.features ? 'animate-scale-in animation-delay-400' : 'animation-ready'}`}>
             <div className="feature-icon-container">
               <Vote className="feature-icon" size={40} strokeWidth={1.5} />
             </div>
@@ -64,7 +102,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="feature-item">
+          <div className={`feature-item hover-lift ${isVisible.features ? 'animate-scale-in animation-delay-600' : 'animation-ready'}`}>
             <div className="feature-icon-container">
               <Share2 className="feature-icon" size={40} strokeWidth={1.5} />
             </div>
@@ -78,12 +116,20 @@ export default function Home() {
       </section>
 
       {/* HOW IT WORKS SECTION */}
-      <section id="how-it-works" className="works">
-        <h2 className="features-title">How it Works</h2>
-        <p className="features-subtitle">Three simple steps to organize the perfect group event.</p>
+      <section
+        id="how-it-works"
+        className={`works ${isVisible.works ? 'section-visible' : ''}`}
+        data-section="works"
+      >
+        <h2 className={`features-title ${isVisible.works ? 'animate-fade-in-up' : 'animation-ready'}`}>
+          How it Works
+        </h2>
+        <p className={`features-subtitle ${isVisible.works ? 'animate-fade-in-up animation-delay-200' : 'animation-ready'}`}>
+          Three simple steps to organize the perfect group event.
+        </p>
 
         <div className="features-grid">
-          <div className="feature-item">
+          <div className={`feature-item ${isVisible.works ? 'animate-slide-in-left animation-delay-300' : 'animation-ready'}`}>
             <div className="works-icon">1</div>
             <h3>Create Event</h3>
             <p>
@@ -91,33 +137,33 @@ export default function Home() {
               ideas.
             </p>
 
-            <div className="works-outer-rect">
+            <div className="works-outer-rect hover-lift">
               <div className="works-inner-rect">
                 <img src={PlusIcon} alt="Icon" className="works-rect-icon" />
               </div>
             </div>
           </div>
 
-          <div className="feature-item">
-            <div className="works-icon">2</div>
+          <div className={`feature-item ${isVisible.works ? 'animate-scale-in animation-delay-400' : 'animation-ready'}`}>
+            <div className="works-icon animation-delay-400">2</div>
             <h3>Share & Collect</h3>
             <p>
               Send the link to friends. They mark availability and suggest activities to vote on.
             </p>
 
-            <div className="works-outer-rect">
+            <div className="works-outer-rect hover-lift">
               <div className="works-inner-rect">
                 <img src={GroupIcon} alt="Icon" className="works-rect-icon" />
               </div>
             </div>
           </div>
 
-          <div className="feature-item">
-            <div className="works-icon">3</div>
+          <div className={`feature-item ${isVisible.works ? 'animate-slide-in-right animation-delay-600' : 'animation-ready'}`}>
+            <div className="works-icon animation-delay-600">3</div>
             <h3>Vote & Plan</h3>
             <p>Everyone votes on activities and times. The best option wins automatically.</p>
 
-            <div className="works-outer-rect">
+            <div className="works-outer-rect hover-lift">
               <div className="works-inner-rect">
                 <img src={CheckmarkIcon} alt="Icon" className="works-rect-icon" />
               </div>
