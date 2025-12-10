@@ -223,8 +223,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-dark-green);
-  opacity: 0.6;
+  color: #000;
+  opacity: 0.8;
   transition: opacity 0.2s ease;
 }
 
