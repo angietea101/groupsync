@@ -5,17 +5,17 @@ import Navbar from '../components/Navbar';
 import GoogleIcon from '../assets/google.svg?react';
 import AppleIcon from '../assets/apple.svg?react';
 import GitHubIcon from '../assets/github.svg?react';
+import { Eye, EyeOff } from 'lucide-react';
 import Footer from '../components/Footer';
 import { auth } from '../services/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-
 export default function SignIn() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  const [showPassword, setShowPassword] = useState(false);
   const handleSignIn = async () => {
     setError('');
 
@@ -45,12 +45,26 @@ export default function SignIn() {
           />
 
           <label>Password</label>
-          <input
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="password-input-wrapper">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button
+              type="button"
+              className="password-toggle-btn"
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              {showPassword ? (
+                <EyeOff size={20} />
+              ) : (
+                <Eye size={20} />
+              )}
+            </button>
+          </div>
 
           {error && <p style={{ color: 'red', fontSize: 14 }}>{error}</p>}
 

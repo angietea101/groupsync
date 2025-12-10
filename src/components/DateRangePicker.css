@@ -5,7 +5,6 @@
     --color-text: #333;
 }
 
-/* Container */
 .calendar-container {
     font-family: Arial, sans-serif;
     width: 300px;
@@ -16,7 +15,6 @@
     user-select: none;
 }
 
-/* Header */
 .calendar-header {
     display: flex;
     justify-content: space-between;
@@ -41,7 +39,6 @@
     font-weight: 600;
 }
 
-/* Grid */
 .days-of-week-grid,
 .days-grid {
     display: grid;
@@ -49,14 +46,12 @@
     text-align: center;
 }
 
-/* Weekday labels */
 .day-of-week {
     padding: 8px 0;
     font-size: 0.8rem;
     color: #666;
 }
 
-/* Day cells */
 .day-cell {
     height: 38px;
     display: flex;
@@ -78,12 +73,10 @@
     font-weight: 600;
 }
 
-/* Subtle hover */
 .day-cell:hover {
     background: var(--color-primary-light);
 }
 
-/* Selected count */
 .info {
     margin-top: 12px;
     text-align: center;

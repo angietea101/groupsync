@@ -66,7 +66,6 @@ export default function Plan() {
             readOnly
           />
           <p className="helper-text">This is the period your group will pick availability from</p>
-
           {isCalendarOpen && (
             <div>
               <DateRangePicker onChange={handleDateRangeChange} />
