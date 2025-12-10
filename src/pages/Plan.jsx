@@ -1,7 +1,7 @@
 import Navbar from '../components/Navbar';
 import DateRangePicker from '../components/DateRangePicker';
 import { useState } from 'react';
-
+import AvailabilityPicker from '../components/AvailabilityPicker';
 const parseLocalDate = (dateStr) => {
   const [y, m, d] = dateStr.split("-").map(Number);
   return new Date(y, m - 1, d);
@@ -50,7 +50,7 @@ export default function Plan() {
     dateRange.startDate && dateRange.endDate
       ? `${formatDisplayDate(dateRange.startDate)} to ${formatDisplayDate(dateRange.endDate)}`
       : '';
-
+  const eventDates = ['2025-12-11', '2025-12-13', '2025-12-14', '2025-12-16', '2025-12-18' ,'2025-12-20'];
   return (
     <>
       <Navbar />
@@ -75,7 +75,13 @@ export default function Plan() {
         <button onClick={() => console.log(dateRange)}>
           Log Selected Dates
         </button>
-
+        <div className="home-container">
+            <AvailabilityPicker 
+                dates={eventDates} 
+                startTime={9} 
+                endTime={20.5}
+            />
+        </div>
       </div>
     </>
   );
