@@ -57,7 +57,7 @@ export default function Navbar() {
               <Link to="/viewevents" className="sign-in">
                 View Events
               </Link>
-              <Link to="/planevent">
+              <Link to="/createplan">
                 <button className="get-started">Plan Event</button>
               </Link>
             </>

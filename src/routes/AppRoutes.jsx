@@ -3,8 +3,8 @@ import Home from '../pages/Home';
 import SignIn from '../pages/SignIn';
 import CreateAccount from '../pages/CreateAccount';
 import ViewEvents from '../pages/ViewEvents';
-import Plan from '../pages/Plan';
 import PlanEvent from '../pages/PlanEvent';
+import CreatePlan from '../pages/CreatePlan';
 
 import ScrollToHash from '../components/ScrollToHash';
 
@@ -17,9 +17,9 @@ export default function AppRoutes() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/createaccount" element={<CreateAccount />} />
         <Route path="/viewevents" element={<ViewEvents />} />
-        <Route path="/planevent" element={<PlanEvent />} />
+        <Route path="/createplan" element={<CreatePlan />} />
 
-        <Route path="/plan" element={<Plan />} />
+        <Route path="/planevent" element={<PlanEvent />} />
       </Routes>
     </BrowserRouter>
   );

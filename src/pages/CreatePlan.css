@@ -47,6 +47,15 @@
   background: white;
   border: 1px solid var(--color-border);
   height: 2.7rem;
+  margin-top: 0.5rem;
+}
+
+.createevent-card input::placeholder,
+.createevent-card textarea::placeholder {
+  color: #999;
+  font-size: var(--font-md);
+  font-weight: 400;
+  opacity: 1;
 }
 
 .createevent-card textarea {
@@ -80,7 +89,6 @@
   position: relative;
 }
 
-/* Back button fixed on top-left */
 .back-global {
   position: absolute;
   top: 1rem;
@@ -137,14 +145,19 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  margin-top: 0.5rem;
 }
 
 .date-input-display .placeholder {
   color: #999;
+  font-size: var(--font-md);
+  font-weight: 400;
+  opacity: 1;
 }
 
 .date-input-display .filled {
   color: var(--color-dark);
+  font-size: var(--font-md);
 }
 
 .calendar-icon {
