@@ -97,7 +97,7 @@ export default function Navbar() {
               <Link to="/viewevents" className="mobile-sign-in" onClick={closeMobileMenu}>
                 View Events
               </Link>
-              <Link to="/plan" onClick={closeMobileMenu}>
+              <Link to="/createplan" onClick={closeMobileMenu}>
                 <button className="get-started mobile-btn">Plan Events</button>
               </Link>
             </>
