@@ -1,0 +1,123 @@
+.createevent-page {
+  margin-right: var(--space-xxxxl);
+  margin-left: var(--space-xxxxl);
+  margin-top: var(--space-lg);
+  font-family: sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.createevent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.createevent-header h1 {
+  margin: 0;
+}
+
+.createevent-header .event-info {
+  color: var(--color-border);
+  margin-top: var(--space-xs);
+  display: flex;
+  align-items: center;
+  font-size: var(--font-lg);
+}
+
+.createevent-header .event-info svg {
+  margin-right: 0.25rem;
+}
+
+.createevent-header button {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  cursor: pointer;
+  transition: background 0.2s;
+  color: var(--color-black);
+  height: 2.5rem;
+  width: 10%;
+}
+
+.createevent-header button:hover {
+  background: var(--color-primary-light);
+}
+
+.createevent-body {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+.availability-section {
+  flex: 1;
+}
+
+.availability-section h3 {
+  margin-bottom: 0.5rem;
+}
+
+.activity-poll-section {
+  flex: 1;
+}
+
+.activity-input,
+.activity-poll-item {
+  width: 100%;
+}
+
+.activity-poll-section h3 {
+  margin-bottom: 0.5rem;
+}
+
+.activity-poll-item {
+  background: var(--color-white);
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--color-border);
+  padding: var(--space-xs);
+  margin-bottom: var(--space-xs);
+  padding: 1rem;
+}
+
+.activity-poll-bar {
+  height: 6px;
+  background: var(--color-primary);
+  margin-top: var(--space-xs);
+  border-radius: 4px;
+}
+
+.activity-poll-item small {
+  font-size: var(--font-sm);
+}
+
+.activity-input {
+  width: 90%;
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+}
+
+.footer-responded {
+  margin-top: var(--space-xl);
+  font-size: var(--font-sm);
+  color: #666;
+}
+
+.footer-responded span {
+  margin-left: var(--space-xs);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-btn);
+  color: var(--color-white);
+}
+
+.footer-responded span:nth-child(odd) {
+  background: #ccc;
+}
+
+.footer-responded span:nth-child(even) {
+  background: #8fcf7e;
+}
