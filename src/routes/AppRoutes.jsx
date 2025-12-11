@@ -4,6 +4,7 @@ import SignIn from '../pages/SignIn';
 import CreateAccount from '../pages/CreateAccount';
 import ViewEvents from '../pages/ViewEvents';
 import Plan from '../pages/Plan';
+import PlanEvent from '../pages/PlanEvent';
 
 import ScrollToHash from '../components/ScrollToHash';
 
@@ -16,6 +17,8 @@ export default function AppRoutes() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/createaccount" element={<CreateAccount />} />
         <Route path="/viewevents" element={<ViewEvents />} />
+        <Route path="/planevent" element={<PlanEvent />} />
+
         <Route path="/plan" element={<Plan />} />
       </Routes>
     </BrowserRouter>

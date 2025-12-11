@@ -45,16 +45,20 @@ export default function Navbar() {
         <div className="navbar-right desktop-only">
           {!user ? (
             <>
-              <Link to="/signin" className="sign-in">Sign In</Link>
+              <Link to="/signin" className="sign-in">
+                Sign In
+              </Link>
               <Link to="/createaccount">
                 <button className="get-started">Get Started</button>
               </Link>
             </>
           ) : (
             <>
-              <Link to="/viewevents" className="sign-in">View Events</Link>
-              <Link to="/plan">
-                <button className="get-started">Plan Events</button>
+              <Link to="/viewevents" className="sign-in">
+                View Events
+              </Link>
+              <Link to="/planevent">
+                <button className="get-started">Plan Event</button>
               </Link>
             </>
           )}
@@ -67,11 +71,17 @@ export default function Navbar() {
 
       <div className={`mobile-menu ${isMobileMenuOpen ? 'active' : ''}`}>
         <div className="mobile-links">
-          <Link to="/#features" onClick={closeMobileMenu}>Features</Link>
-          <Link to="/#how-it-works" onClick={closeMobileMenu}>How it Works</Link>
-          <Link to="/#team" onClick={closeMobileMenu}>Team</Link>
+          <Link to="/#features" onClick={closeMobileMenu}>
+            Features
+          </Link>
+          <Link to="/#how-it-works" onClick={closeMobileMenu}>
+            How it Works
+          </Link>
+          <Link to="/#team" onClick={closeMobileMenu}>
+            Team
+          </Link>
         </div>
-        
+
         <div className="mobile-auth">
           {!user ? (
             <>

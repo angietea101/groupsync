@@ -1,88 +1,88 @@
 :root {
-    --color-primary-dark: #cc785a;
-    --color-primary-light: #fbe5de;
-    --color-white: #fff;
-    --color-text: #333;
+  --color-primary-dark: #cc785a;
+  --color-primary-light: #fbe5de;
+  --color-white: #fff;
+  --color-text: #333;
 }
 
 .calendar-container {
-    font-family: Arial, sans-serif;
-    width: 300px;
-    padding: 16px;
-    border-radius: 8px;
-    background: var(--color-white);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    user-select: none;
+  font-family: Arial, sans-serif;
+  width: 300px;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--color-white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  user-select: none;
 }
 
 .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
 .nav-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    color: var(--color-text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--color-text);
 }
 
 .nav-button:hover {
-    background: #eee;
+  background: #eee;
 }
 
 .month-name {
-    font-size: 1.1rem;
-    font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .days-of-week-grid,
 .days-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    text-align: center;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
 }
 
 .day-of-week {
-    padding: 8px 0;
-    font-size: 0.8rem;
-    color: #666;
+  padding: 8px 0;
+  font-size: 0.8rem;
+  color: #666;
 }
 
 .day-cell {
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border-radius: 50%;
-    color: var(--color-text);
-    transition: background 0.15s;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  color: var(--color-text);
+  transition: background 0.15s;
 }
 
 .day-cell.other-month {
-    color: #ccc;
+  color: #ccc;
 }
 
 .day-cell.selected {
-    background: var(--color-primary-dark);
-    color: var(--color-white);
-    font-weight: 600;
+  background: var(--color-primary-dark);
+  color: var(--color-white);
+  font-weight: 600;
 }
 
 .day-cell:hover {
-    background: var(--color-primary-light);
+  background: var(--color-primary-hover);
 }
 
 .info {
-    margin-top: 12px;
-    text-align: center;
-    font-size: 0.85rem;
-    padding: 6px;
-    background: #f7f7f7;
-    border-radius: 4px;
-    color: #666;
+  margin-top: 12px;
+  text-align: center;
+  font-size: 0.85rem;
+  padding: 6px;
+  background: #f7f7f7;
+  border-radius: 4px;
+  color: #666;
 }

@@ -1,0 +1,165 @@
+/* Entire area under navbar */
+.createevent-container {
+  min-height: calc(90vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  overflow: hidden;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  flex-direction: column;
+}
+
+/* Main card */
+.createevent-card {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  padding: var(--space-lg);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.createevent-card label {
+  font-size: var(--font-sm);
+}
+
+/* Inputs */
+.createevent-card input,
+.createevent-card textarea {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 12px;
+  font-size: var(--font-md);
+  background: white;
+  border: 1px solid var(--color-border);
+  height: 2.7rem;
+}
+
+.createevent-card textarea {
+  height: 6rem;
+  resize: none;
+}
+
+/* Create button */
+.createevent-btn {
+  width: 100%;
+  height: 3.5rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: var(--font-base);
+  cursor: pointer;
+  margin-top: var(--space-md);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.createevent-btn:hover {
+  opacity: 0.9;
+}
+
+/* Page wrapper */
+.createevent-page {
+  position: relative;
+}
+
+/* Back button fixed on top-left */
+.back-global {
+  position: absolute;
+  top: 1rem;
+  left: 4rem;
+  font-size: var(--font-sm);
+  text-decoration: none;
+  color: var(--color-dark-green);
+  font-weight: 500;
+}
+
+.back-global:hover {
+  color: var(--color-primary);
+}
+
+/* Subtitle */
+.subtitle {
+  text-align: center;
+  opacity: 0.7;
+  margin-top: -0.5rem;
+  margin-bottom: var(--space-md);
+}
+
+/* Form wrapper */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.required {
+  color: red;
+  margin-left: 2px;
+}
+
+.optional {
+  color: #999;
+  font-weight: 400;
+  margin-left: 2px;
+}
+
+.date-picker-wrapper {
+  position: relative;
+}
+
+/* Input-looking field */
+.date-input-display {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  height: 2.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.date-input-display .placeholder {
+  color: #999;
+}
+
+.date-input-display .filled {
+  color: var(--color-dark);
+}
+
+.calendar-icon {
+  opacity: 0.6;
+}
+
+.datepicker-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+
+  background: white;
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
