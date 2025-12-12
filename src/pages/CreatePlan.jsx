@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import DateRangePicker from '../components/DateRangePicker';
 import { useState, useRef, useEffect } from 'react';
 import { Calendar } from 'lucide-react';
-import {createEvent } from '../services/firebaseService';
+import { createEvent } from '../services/firebaseService';
 
 export default function PlanEvent() {
   const navigate = useNavigate();
@@ -55,12 +55,12 @@ export default function PlanEvent() {
         title: eventName,
         description: description,
         dates: eventDates.dates,
-      })
+      });
 
       navigate(`/planevent/${eventId}`);
     } catch (err) {
       console.error('Error creating event:', err);
-      setError(err.message || 'Failed to create event. Please try again')
+      setError(err.message || 'Failed to create event. Please try again');
     } finally {
       setLoading(false);
     }
@@ -68,21 +68,22 @@ export default function PlanEvent() {
   return (
     <>
       <Navbar />
-      <div className="createevent-page">
-        <div className="createevent-container">
+      <div className="createplan-page">
+        <div className="createplan-container">
           <h1 className="title">Create a New Plan</h1>
           <p className="subtitle">Plan your perfect gathering.</p>
-          <div className="createevent-card">
+          <div className="createplan-card">
             <form className="form" onSubmit={handleSubmit}>
               <div>
                 <label>
                   Event Name <span className="required">*</span>
                 </label>
-                <input 
-                type="text" 
-                required placeholder="E.g., Weekend Hike"
-                value={eventName}
-                onChange={(e) => setEventaName(e.target.value)} 
+                <input
+                  type="text"
+                  required
+                  placeholder="E.g., Weekend Hike"
+                  value={eventName}
+                  onChange={(e) => setEventaName(e.target.value)}
                 />
               </div>
 
@@ -90,10 +91,10 @@ export default function PlanEvent() {
                 <label>
                   Description <span className="optional">(optional)</span>
                 </label>
-                <textarea 
-                placeholder="Add more details about the event..."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                <textarea
+                  placeholder="Add more details about the event..."
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
               </div>
 
@@ -121,13 +122,9 @@ export default function PlanEvent() {
                 </div>
               </div>
 
-              {error && <p  className='error-msg'>{error}</p>}
+              {error && <p className="error-msg">{error}</p>}
 
-              <button
-              type="submit"
-              className="createevent-btn"
-              disabled={loading}
-              >
+              <button type="submit" className="createplan-btn" disabled={loading}>
                 {loading ? 'Creating Event...' : 'Next'}
               </button>
             </form>

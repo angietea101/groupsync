@@ -1,20 +1,34 @@
-/* Entire area under navbar */
-.createevent-container {
+/* Page wrapper */
+.createplan-page {
+  position: relative;
+  padding-left: clamp(1rem, 6vw, 3rem);
+  padding-right: clamp(1rem, 6vw, 3rem);
+}
+
+.createplan-container {
   min-height: calc(90vh - 80px);
   display: flex;
   justify-content: center;
   align-items: center;
   background: transparent;
-  overflow: hidden;
   margin-top: 2rem;
   margin-bottom: 2rem;
+
   flex-direction: column;
+  overflow: visible;
+
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 0;
 }
 
 /* Main card */
-.createevent-card {
+.createplan-card {
   width: 100%;
-  max-width: 500px;
+  margin: 0;
   background: white;
   padding: var(--space-lg);
   border-radius: 10px;
@@ -26,6 +40,7 @@
 
   max-height: 100%;
   overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .title {
@@ -33,13 +48,13 @@
   margin-bottom: var(--space-md);
 }
 
-.createevent-card label {
+.createplan-card label {
   font-size: var(--font-sm);
 }
 
 /* Inputs */
-.createevent-card input,
-.createevent-card textarea {
+.createplan-card input,
+.createplan-card textarea {
   width: 100%;
   padding: var(--space-sm) var(--space-md);
   border-radius: 12px;
@@ -50,21 +65,21 @@
   margin-top: 0.5rem;
 }
 
-.createevent-card input::placeholder,
-.createevent-card textarea::placeholder {
+.createplan-card input::placeholder,
+.createplan-card textarea::placeholder {
   color: #999;
   font-size: var(--font-md);
   font-weight: 400;
   opacity: 1;
 }
 
-.createevent-card textarea {
+.createplan-card textarea {
   height: 6rem;
   resize: none;
 }
 
 /* Create button */
-.createevent-btn {
+.createplan-btn {
   width: 100%;
   height: 3.5rem;
   background: var(--color-primary);
@@ -80,13 +95,8 @@
   justify-content: center;
 }
 
-.createevent-btn:hover {
+.createplan-btn:hover {
   opacity: 0.9;
-}
-
-/* Page wrapper */
-.createevent-page {
-  position: relative;
 }
 
 .back-global {
@@ -173,6 +183,11 @@
 
   background: white;
   border-radius: 12px;
-  padding: 0.75rem;
+  padding: 1rem;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+
+  width: clamp(280px, 90vw, 343px);
+
+  max-height: 85vh;
+  overflow-y: auto;
 }
