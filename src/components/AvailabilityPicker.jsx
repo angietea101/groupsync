@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import moment from 'moment';
 import './AvailabilityPicker.css';
 
@@ -17,8 +17,16 @@ const AvailabilityPicker = ({
   startTime = 9,
   endTime = 20,
   slotDuration = TIME_SLOT_MINUTES,
+  initialAvailability = {},
+  onSave,
 }) => {
-  const [availability, setAvailability] = useState({});
+  const [availability, setAvailability] = useState(initialAvailability);
+
+  useEffect(() => {
+    if (Object.keys(initialAvailability).length > 0) {
+      setAvailability(initialAvailability);
+    }
+  }, [initialAvailability]);
 
   const [isDragging, setIsDragging] = useState(false);
   const [isSelecting, setIsSelecting] = useState(false);
@@ -62,10 +70,17 @@ const AvailabilityPicker = ({
         });
       }
 
-      return {
+     const newState = {
         ...prev,
-        [date]: currentSlots.length > 0 ? currentSlots : undefined,
       };
+
+      if (currentSlots.length > 0) {
+        newState[date] = currentSlots;
+      } else {
+        delete newState[date];
+      }
+
+      return newState;
     });
   }, []);
 
@@ -100,10 +115,17 @@ const AvailabilityPicker = ({
 
           newSlots.sort((a, b) => moment(a, 'H:mm').diff(moment(b, 'H:mm')));
 
-          return {
+          const newState = {
             ...prev,
-            [date]: newSlots.length > 0 ? newSlots : undefined,
           };
+
+          if (newSlots.length > 0) {
+            newState[date] = newSlots;
+          } else {
+            delete newState[date];
+          }
+
+          return newState;
         });
       }
     },
@@ -111,9 +133,14 @@ const AvailabilityPicker = ({
   );
 
   const handleMouseUp = useCallback(() => {
-    setIsDragging(false);
-    console.log('Final Availability:', availability);
-  }, [availability]);
+    if (isDragging) {
+      setIsDragging(false);
+      
+      if (onSave) {
+        onSave(availability);
+      }
+    }
+  }, [isDragging, availability, onSave]);
 
   React.useEffect(() => {
     document.addEventListener('mouseup', handleMouseUp);

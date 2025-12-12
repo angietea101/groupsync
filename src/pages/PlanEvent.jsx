@@ -3,9 +3,9 @@ import AvailabilityPicker from '../components/AvailabilityPicker';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Calendar, ChevronDown, UsersRound, Link2 } from 'lucide-react';
-import { getEvent } from '../services/firebaseService';
+import { getEvent, getEventParticipants, addParticipant, updateAvailability } from '../services/firebaseService';
 import './PlanEvent.css';
-
+import { auth } from '../services/firebase';
 export default function PlanEvent() {
   const { eventId } = useParams();
 
@@ -15,6 +15,9 @@ export default function PlanEvent() {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
+  const [currentParticipantId, setCurrentParticipantId] = useState(null);
+  const [myAvailability, setMyAvailability] = useState({});
 
   const [eventDates] = useState([
     '2025-12-11',
@@ -31,23 +34,63 @@ export default function PlanEvent() {
   const [invited] = useState(['Ruben', 'Angie', 'Diego', 'Sonia']);
 
   useEffect(() => {
-    async function fetchEvent() {
+    async function initPage() {
       try {
         setLoading(true);
         const eventData = await getEvent(eventId);
         setEvent(eventData);
+
+        // Check if user is logged in
+        const user = auth.currentUser;
+        
+        if (user) {
+            // Fetch existing participants to see if we are already in there
+            const participants = await getEventParticipants(eventId);
+            const foundParticipant = participants.find(p => p.userId === user.uid);
+
+            if (foundParticipant) {
+                setCurrentParticipantId(foundParticipant.id);
+                setMyAvailability(foundParticipant.availability || {});
+            } else {
+                // If user is new to this event, add them immediately
+                const newId = await addParticipant(eventId, {
+                    name: user.displayName || 'Anonymous User'
+                });
+                setCurrentParticipantId(newId);
+                setMyAvailability({});
+            }
+        }
       } catch (err){
-        console.error('Error fetching event:', err);
-        setError(err.message || 'Failed to load event');
+        console.error('Error loading event:', err);
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     }
 
     if (eventId) {
-      fetchEvent();
+      initPage();
     }
   }, [eventId]);
+
+  const handleAvailabilitySave = async (newAvailability) => {
+    if (!currentParticipantId) {
+        alert("You must be logged in to save availability.");
+        return;
+    }
+
+    try {
+        // Optimistically update local state
+        setMyAvailability(newAvailability);
+        
+        // Update Firestore
+        await updateAvailability(eventId, currentParticipantId, newAvailability);
+        console.log("Availability saved to Firestore!");
+    } catch (err) {
+        console.error("Failed to save availability:", err);
+        // Optional: Revert local state on error
+    }
+  };
 
   const handleClick = (e) => {
     const btn = e.currentTarget;
@@ -160,7 +203,8 @@ export default function PlanEvent() {
         <div className="createevent-body">
           <div className="availability-section">
             <h3>Availability</h3>
-            <AvailabilityPicker dates={event.dates} startTime={9} endTime={20.5} />
+            <AvailabilityPicker dates={event.dates} startTime={9} endTime={20.5} initialAvailability={myAvailability}
+                onSave={handleAvailabilitySave} />
           </div>
 
           <div className="activity-poll-section">
