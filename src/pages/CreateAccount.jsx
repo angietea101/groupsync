@@ -52,6 +52,7 @@ export default function CreateAccount() {
         uid: res.user.uid,
         fullName,
         email,
+        createdEvents: [],
         createdAt: new Date(),
       });
 
