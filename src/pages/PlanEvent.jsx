@@ -1,12 +1,20 @@
 import Navbar from '../components/Navbar';
 import AvailabilityPicker from '../components/AvailabilityPicker';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Calendar, ChevronDown, UsersRound, Link2 } from 'lucide-react';
+import { getEvent } from '../services/firebaseService';
 import './PlanEvent.css';
 
 export default function PlanEvent() {
+  const { eventId } = useParams();
+
   const [showDescription, setShowDescription] = useState(true);
   const [copied, setCopied] = useState(false);
+
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   const [eventDates] = useState([
     '2025-12-11',
@@ -22,6 +30,25 @@ export default function PlanEvent() {
   ]);
   const [invited] = useState(['Ruben', 'Angie', 'Diego', 'Sonia']);
 
+  useEffect(() => {
+    async function fetchEvent() {
+      try {
+        setLoading(true);
+        const eventData = await getEvent(eventId);
+        setEvent(eventData);
+      } catch (err){
+        console.error('Error fetching event:', err);
+        setError(err.message || 'Failed to load event');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    if (eventId) {
+      fetchEvent();
+    }
+  }, [eventId]);
+
   const handleClick = (e) => {
     const btn = e.currentTarget;
 
@@ -29,6 +56,10 @@ export default function PlanEvent() {
     btn.classList.remove('flash');
     void btn.offsetWidth;
     btn.classList.add('flash');
+
+    // copy link to clipboard
+    const link = `${window.location.origin}/planevent/${eventId}`;
+    navigator.clipboard.writeText(link);
 
     // Change text
     setCopied(true);
@@ -39,6 +70,51 @@ export default function PlanEvent() {
     }, 1000);
   };
 
+  const formatDateRange = () => {
+    if (!event?.dates || event.dates.length === 0) return '';
+
+    const dates = event.dates.sort();
+    const firstDate = new Date(dates[0] + 'T00:00:00');
+    const lastDate = new Date(dates[dates.length - 1] + 'T00:00:00');
+
+    const formatDate = (date) => {
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    };
+
+    return `${formatDate(firstDate)} - ${formatDate(lastDate)}`
+  };
+
+  if (loading) {
+    return (
+      <>
+      <Navbar />
+      <div className="createevent=page">
+        <p>Loading event...</p>
+      </div>
+      </>
+    );
+  }
+  if (error) {
+    return (
+      <>
+        <Navbar />
+        <div className="createevent-page">
+          <p className="error-msg">{error}</p>
+        </div>
+      </>
+    );
+  }
+  if (!event) {
+    return (
+      <>
+        <Navbar />
+        <div className="createevent-page">
+          <p>Event not found</p>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <Navbar />
@@ -46,26 +122,29 @@ export default function PlanEvent() {
         {/* Header: left = title + description, right = date row + invite */}
         <div className="createevent-header">
           <div className="header-left">
-            <h1>Hangout #1</h1>
+            <h1>{event.title}</h1>
 
-            <div
-              className="description-toggle"
-              onClick={() => setShowDescription(!showDescription)}
-            >
-              <span className="description-label">Description</span>
-              <ChevronDown size={16} className={`chevron ${showDescription ? 'open' : ''}`} />
-            </div>
+            {event.description && (
+              <>
+                <div
+                  className="description-toggle"
+                  onClick={() => setShowDescription(!showDescription)}
+                >
+                  <span className="description-label">Description</span>
+                  <ChevronDown size={16} className={`chevron ${showDescription ? 'open' : ''}`} />
+                </div>
 
-            <div className={`description-content ${showDescription ? 'open' : ''}`}>
-              Planning our first hangout for the group! Add your availability and suggest
-              activities.
-            </div>
+                <div className={`description-content ${showDescription ? 'open' : ''}`}>
+                  {event.description}
+                </div>
+              </>
+            )}
 
             {/* NEW: date + invite button together, under description */}
             <div className="date-invite-row">
               <div className="event-info">
                 <Calendar />
-                <span className="event-info-text">May 18 - May 25 ·</span>
+                <span className="event-info-text">{formatDateRange()} ·</span>
                 <UsersRound />
                 <span> {invited.length} invited</span>
               </div>
@@ -81,7 +160,7 @@ export default function PlanEvent() {
         <div className="createevent-body">
           <div className="availability-section">
             <h3>Availability</h3>
-            <AvailabilityPicker dates={eventDates} startTime={9} endTime={20.5} />
+            <AvailabilityPicker dates={event.dates} startTime={9} endTime={20.5} />
           </div>
 
           <div className="activity-poll-section">
