@@ -2,182 +2,186 @@ import React, { useState, useCallback, useMemo } from 'react';
 import moment from 'moment';
 import './AvailabilityPicker.css';
 
-const TIME_SLOT_MINUTES = 30; 
+const TIME_SLOT_MINUTES = 30;
 
 const formatTimeLabel = (hour, minute) => {
-    return moment().hour(hour).minute(minute).format('H:mm');
+  return moment().hour(hour).minute(minute).format('H:mm');
 };
 
 const formatDayName = (dateString) => {
-    return moment(dateString, 'YYYY-MM-DD').format('ddd');
+  return moment(dateString, 'YYYY-MM-DD').format('ddd');
 };
 
 const AvailabilityPicker = ({
-    dates,
-    startTime = 9,
-    endTime = 20, 
-    slotDuration = TIME_SLOT_MINUTES
+  dates,
+  startTime = 9,
+  endTime = 20,
+  slotDuration = TIME_SLOT_MINUTES,
 }) => {
-    const [availability, setAvailability] = useState({});
+  const [availability, setAvailability] = useState({});
 
-    const [isDragging, setIsDragging] = useState(false);
-    const [isSelecting, setIsSelecting] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isSelecting, setIsSelecting] = useState(false);
 
-    const timeSlots = useMemo(() => {
-        const slots = [];
-        let currentHour = startTime;
-        let currentMinute = 0;
+  const timeSlots = useMemo(() => {
+    const slots = [];
+    let currentHour = startTime;
+    let currentMinute = 0;
 
-        while (currentHour * 60 + currentMinute < endTime * 60) {
-            slots.push(formatTimeLabel(currentHour, currentMinute));
-            currentMinute += slotDuration;
-            if (currentMinute >= 60) {
-                currentHour += Math.floor(currentMinute / 60);
-                currentMinute %= 60;
-            }
-        }
-        return slots;
-    }, [startTime, endTime, slotDuration]);
+    while (currentHour * 60 + currentMinute < endTime * 60) {
+      slots.push(formatTimeLabel(currentHour, currentMinute));
+      currentMinute += slotDuration;
+      if (currentMinute >= 60) {
+        currentHour += Math.floor(currentMinute / 60);
+        currentMinute %= 60;
+      }
+    }
+    return slots;
+  }, [startTime, endTime, slotDuration]);
 
-    const isSlotSelected = useCallback((date, slot) => {
-        return availability[date] && availability[date].includes(slot);
-    }, [availability]);
+  const isSlotSelected = useCallback(
+    (date, slot) => {
+      return availability[date] && availability[date].includes(slot);
+    },
+    [availability]
+  );
 
-    const toggleSlot = useCallback((date, slot) => {
-        setAvailability(prev => {
-            const currentSlots = prev[date] ? [...prev[date]] : [];
-            const index = currentSlots.indexOf(slot);
+  const toggleSlot = useCallback((date, slot) => {
+    setAvailability((prev) => {
+      const currentSlots = prev[date] ? [...prev[date]] : [];
+      const index = currentSlots.indexOf(slot);
 
-            if (index > -1) {
-                currentSlots.splice(index, 1);
-            } else {
-                currentSlots.push(slot);
-                currentSlots.sort((a, b) => {
-                    const timeA = moment(a, 'H:mm');
-                    const timeB = moment(b, 'H:mm');
-                    return timeA.diff(timeB);
-                });
-            }
-
-            return {
-                ...prev,
-                [date]: currentSlots.length > 0 ? currentSlots : undefined, 
-            };
+      if (index > -1) {
+        currentSlots.splice(index, 1);
+      } else {
+        currentSlots.push(slot);
+        currentSlots.sort((a, b) => {
+          const timeA = moment(a, 'H:mm');
+          const timeB = moment(b, 'H:mm');
+          return timeA.diff(timeB);
         });
-    }, []);
+      }
 
-    // Mouse Events for Drag and Click functionality :D
+      return {
+        ...prev,
+        [date]: currentSlots.length > 0 ? currentSlots : undefined,
+      };
+    });
+  }, []);
 
-    const handleMouseDown = useCallback((date, slot) => {
-        const currentlySelected = isSlotSelected(date, slot);
-        setIsSelecting(!currentlySelected); 
+  // Mouse Events for Drag and Click functionality :D
 
-        toggleSlot(date, slot); 
-        setIsDragging(true); 
-    }, [isSlotSelected, toggleSlot]);
+  const handleMouseDown = useCallback(
+    (date, slot) => {
+      const currentlySelected = isSlotSelected(date, slot);
+      setIsSelecting(!currentlySelected);
 
-    const handleMouseEnter = useCallback((date, slot) => {
-        if (isDragging) {
-            setAvailability(prev => {
-                const currentSlots = prev[date] ? [...prev[date]] : [];
-                const index = currentSlots.indexOf(slot);
-                let newSlots = [...currentSlots];
+      toggleSlot(date, slot);
+      setIsDragging(true);
+    },
+    [isSlotSelected, toggleSlot]
+  );
 
-                if (isSelecting && index === -1) {
-                    newSlots.push(slot);
-                } else if (!isSelecting && index > -1) {
-                    newSlots.splice(index, 1);
-                } else {
-                    return prev;
-                }
+  const handleMouseEnter = useCallback(
+    (date, slot) => {
+      if (isDragging) {
+        setAvailability((prev) => {
+          const currentSlots = prev[date] ? [...prev[date]] : [];
+          const index = currentSlots.indexOf(slot);
+          let newSlots = [...currentSlots];
 
-                newSlots.sort((a, b) => moment(a, 'H:mm').diff(moment(b, 'H:mm')));
+          if (isSelecting && index === -1) {
+            newSlots.push(slot);
+          } else if (!isSelecting && index > -1) {
+            newSlots.splice(index, 1);
+          } else {
+            return prev;
+          }
 
-                return {
-                    ...prev,
-                    [date]: newSlots.length > 0 ? newSlots : undefined,
-                };
-            });
-        }
-    }, [isDragging, isSelecting]);
+          newSlots.sort((a, b) => moment(a, 'H:mm').diff(moment(b, 'H:mm')));
 
-    const handleMouseUp = useCallback(() => {
-        setIsDragging(false);
-        console.log('Final Availability:', availability);
-    }, [availability]);
+          return {
+            ...prev,
+            [date]: newSlots.length > 0 ? newSlots : undefined,
+          };
+        });
+      }
+    },
+    [isDragging, isSelecting]
+  );
 
-    React.useEffect(() => {
-        document.addEventListener('mouseup', handleMouseUp);
-        return () => {
-            document.removeEventListener('mouseup', handleMouseUp);
-        };
-    }, [handleMouseUp]);
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+    console.log('Final Availability:', availability);
+  }, [availability]);
 
-    const TimeAxis = useMemo(() => (
-        <div className="time-axis">
-            {timeSlots.map((time, index) => {
-                const [h, m] = time.split(':').map(Number);
-                const isFullHour = m === 0;
+  React.useEffect(() => {
+    document.addEventListener('mouseup', handleMouseUp);
+    return () => {
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [handleMouseUp]);
 
-                return (
-                    <div key={time} className={`time-slot-label ${isFullHour ? 'full-hour' : 'half-hour'}`}>
-                        {isFullHour && (
-                            <div className="label-text">
-                                {moment(time, 'H:mm').format('HH:mm')}
-                            </div>
-                        )}
-                        <div className="separator" />
-                    </div>
-                );
-            })}
-        </div>
-    ), [timeSlots]);
+  const TimeAxis = useMemo(
+    () => (
+      <div className="time-axis">
+        {timeSlots.map((time, index) => {
+          const [h, m] = time.split(':').map(Number);
+          const isFullHour = m === 0;
 
-    return (
-    <div className="availability-picker-wrapper">
-        <div className="availability-picker-card">
-            <div className="picker-container">
-                <div className="day-header-row">
-                    <div className="day-header empty-cell">Time</div>
-                    {dates.map((date) => (
-                        <div key={date} className="day-header">
-                            <span className="day-name">{formatDayName(date)}</span>
-                            <span className="date-number">{moment(date).format('D')}</span>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Calendar Grid */}
-                <div className="calendar-grid">
-                    {TimeAxis}
-                    {dates.map((date) => (
-                        <div key={date} className="date-column">
-                            {timeSlots.map((slot) => {
-                                const isSelected = isSlotSelected(date, slot);
-                                return (
-                                    <div
-                                        key={slot}
-                                        className={`time-slot ${isSelected ? 'selected' : 'unselected'}`}
-                                        onMouseDown={() => handleMouseDown(date, slot)}
-                                        onMouseEnter={() => handleMouseEnter(date, slot)}
-                                    />
-                                );
-                            })}
-                        </div>
-                    ))}
-                </div>
+          return (
+            <div key={time} className={`time-slot-label ${isFullHour ? 'full-hour' : 'half-hour'}`}>
+              {isFullHour && (
+                <div className="label-text">{moment(time, 'H:mm').format('HH:mm')}</div>
+              )}
+              <div className="separator" />
             </div>
-        </div>
+          );
+        })}
+      </div>
+    ),
+    [timeSlots]
+  );
 
-        {/* Move instructions outside the card */}
-        <div className="click-instruction">
-            Click and drag to add your time.
-        </div>
+  return (
+    <div className="availability-picker-wrapper">
+      <div className="availability-picker-card">
+        <div className="picker-container">
+          <div className="day-header-row">
+            <div className="day-header empty-cell">Time</div>
+            {dates.map((date) => (
+              <div key={date} className="day-header">
+                <span className="day-name">{formatDayName(date)}</span>
+                <span className="date-number">{moment(date).format('D')}</span>
+              </div>
+            ))}
+          </div>
 
-        {/* Move JSON preview outside the card */}
-        <pre>{JSON.stringify(availability, null, 2)}</pre>
+          {/* Calendar Grid */}
+          <div className="calendar-grid">
+            {TimeAxis}
+            {dates.map((date) => (
+              <div key={date} className="date-column">
+                {timeSlots.map((slot) => {
+                  const isSelected = isSlotSelected(date, slot);
+                  return (
+                    <div
+                      key={slot}
+                      className={`time-slot ${isSelected ? 'selected' : 'unselected'}`}
+                      onMouseDown={() => handleMouseDown(date, slot)}
+                      onMouseEnter={() => handleMouseEnter(date, slot)}
+                    />
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="click-instruction">Click and drag to add your time.</div>
     </div>
-);
+  );
 };
 
 export default AvailabilityPicker;

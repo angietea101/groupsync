@@ -13,6 +13,14 @@
   --color-dark-green: #3d3929;
   --color-purple-hover: #d5d4df;
 
+  /* For picker */
+  --color-bg-picker: #f5f5f5;
+  --color-text-picker: #333;
+  --color-primary-picker: #ddac9c;
+  --color-primary-dark-picker: #cc9988;
+  --color-light-gray-picker: #e0e0e0;
+  --space-lg-half: 1.5rem;
+
   /* Background + Text */
   --color-bg: #eeece2;
   --color-text: #222222;

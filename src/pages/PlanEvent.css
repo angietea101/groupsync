@@ -1,17 +1,18 @@
+/* --- PAGE BASE --- */
 .createevent-page {
-  margin-right: var(--space-xxxxl);
-  margin-left: var(--space-xxxxl);
-  margin-top: var(--space-lg);
+  margin: var(--space-lg) var(--space-xxxxl);
   font-family: sans-serif;
   background: var(--color-bg);
   color: var(--color-text);
 }
 
+/* --- HEADER --- */
 .createevent-header {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* stack by default */
   margin-bottom: var(--space-md);
+  gap: 0.5rem;
 }
 
 .header-left {
@@ -21,29 +22,29 @@
   gap: 0.25rem;
 }
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-shrink: 0;
-}
-
 .date-invite-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   gap: 1rem;
+  flex-wrap: wrap; /* allow wrapping on small screens */
 }
 
 .date-invite-row .event-info {
-  font-size: var(--font-md);
+  font-size: var(--font-lg);
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  flex-shrink: 1;
+  min-width: 0; /* allow shrinking */
 }
 
 .invite-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   width: 10rem;
   padding: 0.6rem 1rem;
   border-radius: var(--radius-btn);
@@ -64,9 +65,10 @@
   background: var(--color-primary-light);
 }
 
-/* Animation */
+/* Flash animation */
 @keyframes flash-primary {
-  0% {
+  0%,
+  30% {
     background: var(--color-primary);
     color: var(--color-white);
     border-color: var(--color-primary);
@@ -82,104 +84,10 @@
   animation: flash-primary 1s ease-out forwards;
 }
 
-.createevent-header h1 {
-  margin: 0;
-}
-
-.createevent-header .event-info {
-  color: var(--color-border);
-  margin-top: var(--space-xs);
-  display: flex;
-  align-items: center;
-  font-size: var(--font-lg);
-}
-
-.createevent-header .event-info svg {
-  margin-right: 0.25rem;
-}
-
-.createevent-body {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-lg);
-  width: 100%;
-}
-
-.availability-section {
-  flex: 1;
-}
-
-.availability-section h3 {
-  margin-bottom: 0.5rem;
-}
-
-.activity-poll-section {
-  flex: 1;
-}
-
-.activity-input,
-.activity-poll-item {
-  width: 100%;
-}
-
-.activity-poll-section h3 {
-  margin-bottom: 0.5rem;
-}
-
-.activity-poll-item {
-  background: var(--color-white);
-  border-radius: var(--radius-btn);
-  border: 1px solid var(--color-border);
-  padding: var(--space-xs);
-  margin-bottom: var(--space-xs);
-  padding: 1rem;
-}
-
-.activity-poll-bar {
-  height: 6px;
-  background: var(--color-primary);
-  margin-top: var(--space-xs);
-  border-radius: 4px;
-}
-
-.activity-poll-item small {
-  font-size: var(--font-sm);
-}
-
-.activity-input {
-  width: 90%;
-  border-radius: var(--radius-btn);
-  border: 1px solid var(--color-border);
-  padding: 1rem;
-}
-
-.footer-responded {
-  margin-top: var(--space-xl);
-  font-size: var(--font-sm);
-  color: #666;
-}
-
-.footer-responded span {
-  margin-left: var(--space-xs);
-  padding: 0.15rem 0.5rem;
-  border-radius: var(--radius-btn);
-  color: var(--color-white);
-}
-
-.footer-responded span:nth-child(odd) {
-  background: #ccc;
-}
-
-.footer-responded span:nth-child(even) {
-  background: #8fcf7e;
-}
-
-/* --- DESCRIPTION DROPDOWN --- */
-
+/* --- DESCRIPTION --- */
 .description-toggle {
   display: flex;
-  gap: 2rem;
-  justify-content: flex-start;
+  gap: 0.5rem;
   align-items: center;
   font-size: var(--font-md);
   margin-top: 0.35rem;
@@ -191,13 +99,6 @@
 
 .chevron {
   color: black;
-}
-
-.description-toggle:hover {
-  opacity: 0.8;
-}
-
-.chevron {
   transition: transform 0.25s ease;
 }
 
@@ -206,7 +107,6 @@
 }
 
 .description-content {
-  margin-bottom: 1rem;
   overflow: hidden;
   max-height: 0;
   opacity: 0;
@@ -223,4 +123,91 @@
   max-height: 200px;
   opacity: 1;
   margin-top: 0.35rem;
+}
+
+/* --- BODY --- */
+.createevent-body {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  width: 100%;
+  flex-wrap: wrap; /* allow stacking */
+}
+
+.availability-section,
+.activity-poll-section {
+  flex: 1 1 300px; /* grow/shrink, min width 300px */
+}
+
+.activity-input,
+.activity-poll-item {
+  width: 100%;
+}
+
+h3 {
+  margin-bottom: 1rem;
+}
+
+.activity-poll-item {
+  background: var(--color-white);
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+  margin-bottom: var(--space-xs);
+}
+
+.activity-poll-bar {
+  height: 6px;
+  background: var(--color-primary);
+  margin-top: var(--space-xs);
+  border-radius: 4px;
+}
+
+.activity-poll-item small {
+  font-size: var(--font-sm);
+}
+
+.activity-input {
+  width: 100%;
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+}
+
+/* --- FOOTER --- */
+.footer-responded {
+  margin-top: var(--space-xl);
+  font-size: var(--font-sm);
+  color: #666;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.footer-responded span {
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-btn);
+  color: var(--color-white);
+}
+
+/* --- MEDIA QUERIES --- */
+@media (max-width: 1300px) {
+  .createevent-page {
+    margin: var(--space-lg) var(--space-xxxl);
+  }
+
+  .createevent-body {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .date-invite-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .invite-button {
+    width: 100%;
+  }
 }

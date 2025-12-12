@@ -1,7 +1,7 @@
 import Navbar from '../components/Navbar';
 import AvailabilityPicker from '../components/AvailabilityPicker';
 import { useState } from 'react';
-import { Calendar, ChevronDown, UsersRound } from 'lucide-react';
+import { Calendar, ChevronDown, UsersRound, Link2 } from 'lucide-react';
 import './PlanEvent.css';
 
 export default function PlanEvent() {
@@ -70,6 +70,7 @@ export default function PlanEvent() {
                 <span> {invited.length} invited</span>
               </div>
               <button className="invite-button" onClick={handleClick}>
+                <Link2 />
                 {copied ? 'Copied' : 'Invite Friends'}
               </button>
             </div>

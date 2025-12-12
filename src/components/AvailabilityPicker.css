@@ -1,39 +1,17 @@
-:root {
-  --color-bg: #f5f5f5;
-  --color-text: #333;
-  --color-primary: #ddac9c;
-  --color-primary-dark: #cc9988;
-  --color-white: #ffffff;
-  --color-light-gray: #e0e0e0;
-  --font-md: 1rem;
-  --space-lg: 1.5rem;
-}
 .availability-picker-wrapper {
-  max-width: 100%;
+  width: 100%;
   margin: 0;
-}
-
-.picker-title {
-  margin-bottom: 1rem;
+  overflow-x: auto; /* horizontal scroll if too many dates */
 }
 
 .availability-picker-card {
   background-color: var(--color-white);
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  max-width: 100%;
-  margin: 0;
-  padding: var(--space-lg);
-  border: 1px solid var(--color-border);
-  max-width: fit-content;
-}
-
-.picker-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--color-text);
-  margin-bottom: var(--space-lg);
-  text-align: left;
+  width: 100%;
+  padding: var(--space-lg-);
+  border: 1px solid var(--color-light-gray-picker);
+  box-sizing: border-box;
 }
 
 .picker-container {
@@ -45,50 +23,36 @@
 
 .day-header-row {
   display: flex;
+  width: 100%;
   gap: 2px;
 }
 
 .day-header {
-  width: 60px;
-  height: 40px;
+  flex: 1 1 0; /* each date grows/shrinks equally */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 4px 0;
-  font-size: var(--font-md);
+  font-size: var(--font-sm);
   color: var(--color-text);
   font-weight: 500;
+  min-width: 40px; /* prevent shrinking too much */
 }
 
 .empty-cell {
-  width: 60px;
+  flex: 0 0 60px; /* fixed width for time labels */
   background-color: transparent;
 }
 
-.day-name {
-  font-weight: bold;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  color: var(--color-text);
-}
-
-.date-number {
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: var(--color-text);
-}
-
-/* --- Calendar Grid --- */
-
 .calendar-grid {
   display: flex;
+  width: 100%;
   gap: 2px;
 }
 
 .time-axis {
-  width: 60px;
-  flex-shrink: 0;
+  flex: 0 0 60px; /* fixed width for time labels */
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -97,28 +61,24 @@
 .time-slot-label {
   height: 30px;
   display: flex;
-  /*align-items: flex-end;*/
   align-items: center;
   padding-right: 1rem;
 }
 
 .label-text {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   color: var(--color-text);
   text-align: right;
   width: 100%;
-  transform: none;
   pointer-events: none;
 }
 
-/* --- Date Columns --- */
-
 .date-column {
+  flex: 1 1 0; /* fill remaining width equally */
   display: flex;
   flex-direction: column;
-  width: 60px;
-  flex-shrink: 0;
   gap: 2px;
+  min-width: 40px;
 }
 
 .time-slot {
@@ -128,12 +88,8 @@
   transition: background-color 0.1s ease;
 }
 
-.date-column .time-slot:last-child {
-  border-bottom: none;
-}
-
 .time-slot.unselected {
-  background-color: var(--color-light-gray);
+  background-color: var(--color-light-gray-picker);
   opacity: 0.6;
 }
 
@@ -148,6 +104,6 @@
 
 .click-instruction {
   margin-top: 1rem;
-  font-size: 12px;
-  color: #999587;
+  font-size: 1rem;
+  color: color(--color-gray);
 }
