@@ -125,7 +125,7 @@ export default function PlanEvent() {
               {error && <p className="error-msg">{error}</p>}
 
               <button type="submit" className="createplan-btn" disabled={loading}>
-                {loading ? 'Creating Event...' : 'Next'}
+                {loading ? 'Loading...' : 'Create'}
               </button>
             </form>
           </div>
