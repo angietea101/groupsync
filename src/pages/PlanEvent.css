@@ -8,10 +8,78 @@
 }
 
 .createevent-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-md);
+}
+
+.header-left {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.date-invite-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--space-md);
+  width: 100%;
+  gap: 1rem;
+}
+
+.date-invite-row .event-info {
+  font-size: var(--font-md);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.invite-button {
+  width: 10rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: var(--font-md);
+  flex-shrink: 0;
+  color: var(--color-black);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.invite-button:hover {
+  background: var(--color-primary-light);
+}
+
+/* Animation */
+@keyframes flash-primary {
+  0% {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+  }
+  100% {
+    background: var(--color-white);
+    color: var(--color-black);
+    border-color: var(--color-border);
+  }
+}
+
+.invite-button.flash {
+  animation: flash-primary 1s ease-out forwards;
 }
 
 .createevent-header h1 {
@@ -28,22 +96,6 @@
 
 .createevent-header .event-info svg {
   margin-right: 0.25rem;
-}
-
-.createevent-header button {
-  padding: var(--space-xs) var(--space-md);
-  border-radius: var(--radius-btn);
-  border: 1px solid var(--color-border);
-  background: var(--color-white);
-  cursor: pointer;
-  transition: background 0.2s;
-  color: var(--color-black);
-  height: 2.5rem;
-  width: 10%;
-}
-
-.createevent-header button:hover {
-  background: var(--color-primary-light);
 }
 
 .createevent-body {
@@ -120,4 +172,55 @@
 
 .footer-responded span:nth-child(even) {
   background: #8fcf7e;
+}
+
+/* --- DESCRIPTION DROPDOWN --- */
+
+.description-toggle {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: var(--font-md);
+  margin-top: 0.35rem;
+  cursor: pointer;
+  color: var(--color-black);
+  padding-right: 0.25rem;
+  user-select: none;
+}
+
+.chevron {
+  color: black;
+}
+
+.description-toggle:hover {
+  opacity: 0.8;
+}
+
+.chevron {
+  transition: transform 0.25s ease;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+.description-content {
+  margin-bottom: 1rem;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  font-size: var(--font-md);
+  margin-top: 0;
+  color: var(--color-border);
+  transition:
+    max-height 0.25s ease,
+    opacity 0.2s ease,
+    margin-top 0.2s ease;
+}
+
+.description-content.open {
+  max-height: 200px;
+  opacity: 1;
+  margin-top: 0.35rem;
 }
