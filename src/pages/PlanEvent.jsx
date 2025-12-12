@@ -36,7 +36,7 @@ export default function PlanEvent() {
     // Reset text after 1s
     setTimeout(() => {
       setCopied(false);
-    }, 3000);
+    }, 1000);
   };
 
   return (
@@ -71,7 +71,7 @@ export default function PlanEvent() {
               </div>
               <button className="invite-button" onClick={handleClick}>
                 <Link2 />
-                {copied ? 'Copied' : 'Invite Friends'}
+                {copied ? 'Copied' : 'Copy Invite Link'}
               </button>
             </div>
           </div>
