@@ -19,7 +19,7 @@ export default function AppRoutes() {
         <Route path="/viewevents" element={<ViewEvents />} />
         <Route path="/createplan" element={<CreatePlan />} />
 
-        <Route path="/planevent" element={<PlanEvent />} />
+        <Route path="/planevent/:eventId" element={<PlanEvent />} />
       </Routes>
     </BrowserRouter>
   );
