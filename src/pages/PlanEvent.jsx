@@ -96,7 +96,7 @@ export default function PlanEvent() {
         }
 
         const fetchedActivities = await getEventActivities(eventId);
-        setActivities(fetchedActivities);
+        setActivities(sortActivitiesByVotes(fetchedActivities));
       } catch (err){
         console.error('Error loading event:', err);
         setError(err.message);
@@ -153,13 +153,13 @@ export default function PlanEvent() {
         suggestedBy: currentUserName,
       });
 
-      setActivities(prev => [...prev, {
+      setActivities(prev => sortActivitiesByVotes([...prev, {
         id: activityId,
         title: newActivity.trim(),
         suggestedBy: currentUserName,
         count: 0,
         votes: [],
-      }]);
+      }]));
 
       setNewActivity('')
     } catch (err) {
@@ -179,7 +179,7 @@ export default function PlanEvent() {
       if (isVoted) {
         await removeVoteFromActivity(eventId, activityId, currentUserName);
 
-        setActivities(prev => prev.map(activity => {
+        setActivities(prev => sortActivitiesByVotes(prev.map(activity => {
           if (activity.id === activityId) {
             return {
               ...activity,
@@ -188,11 +188,11 @@ export default function PlanEvent() {
             };
           }
           return activity;
-        }));
+        })));
       } else {
         await voteForActivity(eventId, activityId, currentUserName);
 
-        setActivities(prev => prev.map(activity => {
+        setActivities(prev => sortActivitiesByVotes(prev.map(activity => {
           if (activity.id === activityId) {
             return {
               ...activity,
@@ -201,12 +201,16 @@ export default function PlanEvent() {
             };
           }
           return activity;
-        }));
+        })));
       }
     } catch (err) {
       console.error('Failed to update vote:', err);
     }
   };
+
+  const sortActivitiesByVotes = (activitiesArray) => {
+    return [...activitiesArray].sort((a, b) => b.count - a.count);
+  }
 
   const handleClick = (e) => {
     const btn = e.currentTarget;
