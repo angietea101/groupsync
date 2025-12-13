@@ -16,6 +16,8 @@ import {
 } from '../services/firebaseService';
 import './PlanEvent.css';
 import { auth } from '../services/firebase';
+import { motion, AnimatePresence } from 'framer-motion'
+
 export default function PlanEvent() {
   const { eventId } = useParams();
 
@@ -185,6 +187,7 @@ export default function PlanEvent() {
               ...activity,
               count: activity.count - 1,
               votes: activity.votes.filter(name => name !== currentUserName),
+              justVoted: true,
             };
           }
           return activity;
@@ -198,11 +201,21 @@ export default function PlanEvent() {
               ...activity,
               count: activity.count + 1,
               votes: [...activity.votes, currentUserName],
+              justVoted: true,
             };
           }
           return activity;
         })));
       }
+      setTimeout(() => {
+      setActivities(prev => prev.map(activity => {
+        if (activity.id === activityId) {
+          const { justVoted, ...rest } = activity;
+          return rest;
+        }
+        return activity;
+        }));
+      }, 300);
     } catch (err) {
       console.error('Failed to update vote:', err);
     }
@@ -334,19 +347,24 @@ export default function PlanEvent() {
           <div className="activity-poll-section">
   <h3>Activity Poll</h3>
   {/* The 'activities' state will now hold the fetched data */}
+  <AnimatePresence>
   {activities.map((activity) => {
-    // Check if the current user has voted for this activity
     const isVoted = activity.votes.includes(currentUserName);
-    // Determine the max vote count for the bar length calculation
     const maxVotes = Math.max(1, ...activities.map(a => a.count));
     
     return (
-      // Style class 'voted' for visual feedback
-      <div key={activity.id} className={`activity-poll-item ${isVoted ? 'voted' : ''}`}>
+      <motion.div
+        key={activity.id}
+        layout
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+        className={`activity-poll-item ${isVoted ? 'voted' : ''} ${activity.justVoted ? 'just-voted' : ''}`}
+      >
         <div className="activity-poll-info">
           <span className="activity-title">{activity.title}</span>
           <div className="activity-poll-bar-container">
-            {/* Calculate bar width relative to the max votes */}
             <div 
               className="activity-poll-bar" 
               style={{ width: `${(activity.count / maxVotes) * 100}%` }} 
@@ -355,7 +373,6 @@ export default function PlanEvent() {
           <small>{activity.count} votes</small>
         </div>
         
-        {/* Voting Button */}
         <button 
           className={`vote-button ${isVoted ? 'voted' : ''}`}
           onClick={() => handleVote(activity.id, activity.votes)}
@@ -363,9 +380,10 @@ export default function PlanEvent() {
         >
           <Heart size={20} fill={isVoted ? 'currentColor' : 'none'}/>
         </button>
-      </div>
+      </motion.div>
     );
   })}
+</AnimatePresence>
   
   {/* Suggestion Input */}
             <div style={{ position: 'relative', width: '100%' }}>
