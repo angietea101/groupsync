@@ -421,7 +421,7 @@ export default function PlanEvent() {
                 }}
                 aria-label="Add activity"
               >
-                <Plus size={20} />
+                <Plus size={25} />
               </button>
             </div>
           </div>
