@@ -3,7 +3,7 @@ import NameInputModal from '../components/NameInputModal';
 import AvailabilityPicker from '../components/AvailabilityPicker';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Calendar, ChevronDown, UsersRound, Link2 } from 'lucide-react';
+import { Calendar, ChevronDown, UsersRound, Link2, Heart, Plus } from 'lucide-react';
 import { 
   getEvent, 
   getEventParticipants, 
@@ -357,21 +357,34 @@ export default function PlanEvent() {
           onClick={() => handleVote(activity.id, activity.votes)}
           aria-label={isVoted ? 'Remove vote' : 'Vote for this activity'}
         >
-          {isVoted ? '✅' : '👍'}
+          <Heart size={20} fill={isVoted ? 'currentColor' : 'none'}/>
         </button>
       </div>
     );
   })}
   
   {/* Suggestion Input */}
-  <input 
-    type="text" 
-    placeholder="Suggest an activity..." 
-    className="activity-input" 
-    value={newActivity}
-    onChange={(e) => setNewActivity(e.target.value)}
-    onKeyDown={handleActivitySuggest}
-  />
+            <div style={{ position: 'relative', width: '100%' }}>
+              <input 
+                type="text" 
+                placeholder="Suggest an activity..." 
+                className="activity-input" 
+                value={newActivity}
+                onChange={(e) => setNewActivity(e.target.value)}
+                onKeyDown={handleActivitySuggest}
+              />
+              <button 
+                className="add-activity-button"
+                onClick={() => {
+                  if (newActivity.trim()) {
+                    handleActivitySuggest({ key: 'Enter' });
+                  }
+                }}
+                aria-label="Add activity"
+              >
+                <Plus size={20} />
+              </button>
+            </div>
 </div>
         </div>
 
