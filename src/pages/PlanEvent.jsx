@@ -4,19 +4,19 @@ import AvailabilityPicker from '../components/AvailabilityPicker';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Calendar, ChevronDown, UsersRound, Link2, Heart, Plus } from 'lucide-react';
-import { 
-  getEvent, 
-  getEventParticipants, 
-  addParticipant, 
-  updateAvailability, 
-  getEventActivities, 
-  addActivity, 
-  voteForActivity, 
-  removeVoteFromActivity 
+import {
+  getEvent,
+  getEventParticipants,
+  addParticipant,
+  updateAvailability,
+  getEventActivities,
+  addActivity,
+  voteForActivity,
+  removeVoteFromActivity,
 } from '../services/firebaseService';
 import './PlanEvent.css';
 import { auth } from '../services/firebase';
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function PlanEvent() {
   const { eventId } = useParams();
@@ -61,22 +61,22 @@ export default function PlanEvent() {
         setEvent(eventData);
 
         const user = auth.currentUser;
-        
-        if (user) {
-            const participants = await getEventParticipants(eventId);
-            const foundParticipant = participants.find(p => p.userId === user.uid);
 
-            if (foundParticipant) {
-                setCurrentParticipantId(foundParticipant.id);
-                setMyAvailability(foundParticipant.availability || {});
-            } else {
-                const newId = await addParticipant(eventId, {
-                    name: user.displayName || 'Anonymous User'
-                });
-                setCurrentParticipantId(newId);
-                setMyAvailability({});
-            }
-            setCurrentUserName(user.displayName || foundParticipant?.name || 'Anonymous')
+        if (user) {
+          const participants = await getEventParticipants(eventId);
+          const foundParticipant = participants.find((p) => p.userId === user.uid);
+
+          if (foundParticipant) {
+            setCurrentParticipantId(foundParticipant.id);
+            setMyAvailability(foundParticipant.availability || {});
+          } else {
+            const newId = await addParticipant(eventId, {
+              name: user.displayName || 'Anonymous User',
+            });
+            setCurrentParticipantId(newId);
+            setMyAvailability({});
+          }
+          setCurrentUserName(user.displayName || foundParticipant?.name || 'Anonymous');
         } else {
           // for when user is not logged in :D
           const savedName = localStorage.getItem(`guest_name_${eventId}`);
@@ -88,7 +88,7 @@ export default function PlanEvent() {
             setCurrentParticipantId(savedParticipantId);
 
             const participants = await getEventParticipants(eventId);
-            const foundParticipant = participants.find(p => p.id === savedParticipantId);
+            const foundParticipant = participants.find((p) => p.id === savedParticipantId);
             if (foundParticipant) {
               setMyAvailability(foundParticipant.availability || {});
             }
@@ -99,7 +99,7 @@ export default function PlanEvent() {
 
         const fetchedActivities = await getEventActivities(eventId);
         setActivities(sortActivitiesByVotes(fetchedActivities));
-      } catch (err){
+      } catch (err) {
         console.error('Error loading event:', err);
         setError(err.message);
       } finally {
@@ -132,21 +132,21 @@ export default function PlanEvent() {
   };
   const handleAvailabilitySave = async (newAvailability) => {
     if (!currentParticipantId) {
-        alert("You must be logged in to save availability.");
-        return;
+      alert('You must be logged in to save availability.');
+      return;
     }
 
     try {
-        setMyAvailability(newAvailability);
-        
-        await updateAvailability(eventId, currentParticipantId, newAvailability);
-        console.log("Availability saved to Firestore!");
+      setMyAvailability(newAvailability);
+
+      await updateAvailability(eventId, currentParticipantId, newAvailability);
+      console.log('Availability saved to Firestore!');
     } catch (err) {
-        console.error("Failed to save availability:", err);
+      console.error('Failed to save availability:', err);
     }
   };
 
-  const handleActivitySuggest = async(e) => {
+  const handleActivitySuggest = async (e) => {
     if (e.key !== 'Enter' || newActivity.trim() === '') return;
 
     try {
@@ -155,15 +155,20 @@ export default function PlanEvent() {
         suggestedBy: currentUserName,
       });
 
-      setActivities(prev => sortActivitiesByVotes([...prev, {
-        id: activityId,
-        title: newActivity.trim(),
-        suggestedBy: currentUserName,
-        count: 0,
-        votes: [],
-      }]));
+      setActivities((prev) =>
+        sortActivitiesByVotes([
+          ...prev,
+          {
+            id: activityId,
+            title: newActivity.trim(),
+            suggestedBy: currentUserName,
+            count: 0,
+            votes: [],
+          },
+        ])
+      );
 
-      setNewActivity('')
+      setNewActivity('');
     } catch (err) {
       console.error('Failed to suggest activity:', err);
     }
@@ -171,7 +176,7 @@ export default function PlanEvent() {
 
   const handleVote = async (activityId, currentVotes) => {
     if (!currentUserName || currentUserName === 'Anonymous') {
-      alert("please ensure your name is set before voting");
+      alert('please ensure your name is set before voting');
       return;
     }
 
@@ -181,40 +186,50 @@ export default function PlanEvent() {
       if (isVoted) {
         await removeVoteFromActivity(eventId, activityId, currentUserName);
 
-        setActivities(prev => sortActivitiesByVotes(prev.map(activity => {
-          if (activity.id === activityId) {
-            return {
-              ...activity,
-              count: activity.count - 1,
-              votes: activity.votes.filter(name => name !== currentUserName),
-              justVoted: true,
-            };
-          }
-          return activity;
-        })));
+        setActivities((prev) =>
+          sortActivitiesByVotes(
+            prev.map((activity) => {
+              if (activity.id === activityId) {
+                return {
+                  ...activity,
+                  count: activity.count - 1,
+                  votes: activity.votes.filter((name) => name !== currentUserName),
+                  justVoted: true,
+                };
+              }
+              return activity;
+            })
+          )
+        );
       } else {
         await voteForActivity(eventId, activityId, currentUserName);
 
-        setActivities(prev => sortActivitiesByVotes(prev.map(activity => {
-          if (activity.id === activityId) {
-            return {
-              ...activity,
-              count: activity.count + 1,
-              votes: [...activity.votes, currentUserName],
-              justVoted: true,
-            };
-          }
-          return activity;
-        })));
+        setActivities((prev) =>
+          sortActivitiesByVotes(
+            prev.map((activity) => {
+              if (activity.id === activityId) {
+                return {
+                  ...activity,
+                  count: activity.count + 1,
+                  votes: [...activity.votes, currentUserName],
+                  justVoted: true,
+                };
+              }
+              return activity;
+            })
+          )
+        );
       }
       setTimeout(() => {
-      setActivities(prev => prev.map(activity => {
-        if (activity.id === activityId) {
-          const { justVoted, ...rest } = activity;
-          return rest;
-        }
-        return activity;
-        }));
+        setActivities((prev) =>
+          prev.map((activity) => {
+            if (activity.id === activityId) {
+              const { justVoted, ...rest } = activity;
+              return rest;
+            }
+            return activity;
+          })
+        );
       }, 300);
     } catch (err) {
       console.error('Failed to update vote:', err);
@@ -223,7 +238,7 @@ export default function PlanEvent() {
 
   const sortActivitiesByVotes = (activitiesArray) => {
     return [...activitiesArray].sort((a, b) => b.count - a.count);
-  }
+  };
 
   const handleClick = (e) => {
     const btn = e.currentTarget;
@@ -257,16 +272,16 @@ export default function PlanEvent() {
       return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     };
 
-    return `${formatDate(firstDate)} - ${formatDate(lastDate)}`
+    return `${formatDate(firstDate)} - ${formatDate(lastDate)}`;
   };
 
   if (loading) {
     return (
       <>
-      <Navbar />
-      <div className="createevent=page">
-        <p>Loading event...</p>
-      </div>
+        <Navbar />
+        <div className="createevent=page">
+          <p>Loading event...</p>
+        </div>
       </>
     );
   }
@@ -294,10 +309,7 @@ export default function PlanEvent() {
   return (
     <>
       <Navbar />
-      <NameInputModal
-      isOpen={showNameModal}
-      onSubmit={handleNameSubmit}
-      />
+      <NameInputModal isOpen={showNameModal} onSubmit={handleNameSubmit} />
       <div className="createevent-page">
         {/* Header: left = title + description, right = date row + invite */}
         <div className="createevent-header">
@@ -340,62 +352,67 @@ export default function PlanEvent() {
         <div className="createevent-body">
           <div className="availability-section">
             <h3>Availability</h3>
-            <AvailabilityPicker dates={event.dates} startTime={9} endTime={20.5} initialAvailability={myAvailability}
-                onSave={handleAvailabilitySave} />
+            <AvailabilityPicker
+              dates={event.dates}
+              startTime={9}
+              endTime={20.5}
+              initialAvailability={myAvailability}
+              onSave={handleAvailabilitySave}
+            />
           </div>
 
           <div className="activity-poll-section">
-  <h3>Activity Poll</h3>
-  {/* The 'activities' state will now hold the fetched data */}
-  <AnimatePresence>
-  {activities.map((activity) => {
-    const isVoted = activity.votes.includes(currentUserName);
-    const maxVotes = Math.max(1, ...activities.map(a => a.count));
-    
-    return (
-      <motion.div
-        key={activity.id}
-        layout
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
-        className={`activity-poll-item ${isVoted ? 'voted' : ''} ${activity.justVoted ? 'just-voted' : ''}`}
-      >
-        <div className="activity-poll-info">
-          <span className="activity-title">{activity.title}</span>
-          <div className="activity-poll-bar-container">
-            <div 
-              className="activity-poll-bar" 
-              style={{ width: `${(activity.count / maxVotes) * 100}%` }} 
-            />
-          </div>
-          <small>{activity.count} votes</small>
-        </div>
-        
-        <button 
-          className={`vote-button ${isVoted ? 'voted' : ''}`}
-          onClick={() => handleVote(activity.id, activity.votes)}
-          aria-label={isVoted ? 'Remove vote' : 'Vote for this activity'}
-        >
-          <Heart size={20} fill={isVoted ? 'currentColor' : 'none'}/>
-        </button>
-      </motion.div>
-    );
-  })}
-</AnimatePresence>
-  
-  {/* Suggestion Input */}
+            <h3>Activity Poll</h3>
+            {/* The 'activities' state will now hold the fetched data */}
+            <AnimatePresence>
+              {activities.map((activity) => {
+                const isVoted = activity.votes.includes(currentUserName);
+                const maxVotes = Math.max(1, ...activities.map((a) => a.count));
+
+                return (
+                  <motion.div
+                    key={activity.id}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4, ease: 'easeInOut' }}
+                    className={`activity-poll-item ${isVoted ? 'voted' : ''} ${activity.justVoted ? 'just-voted' : ''}`}
+                  >
+                    <div className="activity-poll-info">
+                      <span className="activity-title">{activity.title}</span>
+                      <div className="activity-poll-bar-container">
+                        <div
+                          className="activity-poll-bar"
+                          style={{ width: `${(activity.count / maxVotes) * 100}%` }}
+                        />
+                      </div>
+                      <small>{activity.count} votes</small>
+                    </div>
+
+                    <button
+                      className={`vote-button ${isVoted ? 'voted' : ''}`}
+                      onClick={() => handleVote(activity.id, activity.votes)}
+                      aria-label={isVoted ? 'Remove vote' : 'Vote for this activity'}
+                    >
+                      <Heart size={20} fill={isVoted ? 'currentColor' : 'none'} />
+                    </button>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+
+            {/* Suggestion Input */}
             <div style={{ position: 'relative', width: '100%' }}>
-              <input 
-                type="text" 
-                placeholder="Suggest an activity..." 
-                className="activity-input" 
+              <input
+                type="text"
+                placeholder="Suggest an activity..."
+                className="activity-input"
                 value={newActivity}
                 onChange={(e) => setNewActivity(e.target.value)}
                 onKeyDown={handleActivitySuggest}
               />
-              <button 
+              <button
                 className="add-activity-button"
                 onClick={() => {
                   if (newActivity.trim()) {
@@ -407,7 +424,7 @@ export default function PlanEvent() {
                 <Plus size={20} />
               </button>
             </div>
-</div>
+          </div>
         </div>
 
         <div className="footer-responded">
