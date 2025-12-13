@@ -4,7 +4,16 @@ import AvailabilityPicker from '../components/AvailabilityPicker';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Calendar, ChevronDown, UsersRound, Link2 } from 'lucide-react';
-import { getEvent, getEventParticipants, addParticipant, updateAvailability, getEventActivities, addActivity, voteForActivity } from '../services/firebaseService';
+import { 
+  getEvent, 
+  getEventParticipants, 
+  addParticipant, 
+  updateAvailability, 
+  getEventActivities, 
+  addActivity, 
+  voteForActivity, 
+  removeVoteFromActivity 
+} from '../services/firebaseService';
 import './PlanEvent.css';
 import { auth } from '../services/firebase';
 export default function PlanEvent() {
@@ -59,7 +68,6 @@ export default function PlanEvent() {
                 setCurrentParticipantId(foundParticipant.id);
                 setMyAvailability(foundParticipant.availability || {});
             } else {
-                // If user is new to this event, add them immediately (this is where we can implement logic to ask for users name)
                 const newId = await addParticipant(eventId, {
                     name: user.displayName || 'Anonymous User'
                 });
@@ -164,26 +172,39 @@ export default function PlanEvent() {
       alert("please ensure your name is set before voting");
       return;
     }
-    if (currentVotes.includes(currentUserName)) {
-      alert("You have already voted for this activity");
-      return;
-    }
+
+    const isVoted = currentVotes.includes(currentUserName);
 
     try {
-      await voteForActivity(eventId, activityId, currentUserName);
+      if (isVoted) {
+        await removeVoteFromActivity(eventId, activityId, currentUserName);
 
-      setActivities(prev => prev.map(activity => {
-        if (activity.id === activityId){
-          return {
-            ...activity,
-            count: activity.count + 1,
-            votes: [...activity.votes, currentUserName],
-          };
-        }
-        return activity;
-      }));
+        setActivities(prev => prev.map(activity => {
+          if (activity.id === activityId) {
+            return {
+              ...activity,
+              count: activity.count - 1,
+              votes: activity.votes.filter(name => name !== currentUserName),
+            };
+          }
+          return activity;
+        }));
+      } else {
+        await voteForActivity(eventId, activityId, currentUserName);
+
+        setActivities(prev => prev.map(activity => {
+          if (activity.id === activityId) {
+            return {
+              ...activity,
+              count: activity.count + 1,
+              votes: [...activity.votes, currentUserName],
+            };
+          }
+          return activity;
+        }));
+      }
     } catch (err) {
-      console.error('Failed to vote:', err);
+      console.error('Failed to update vote:', err);
     }
   };
 
@@ -334,10 +355,8 @@ export default function PlanEvent() {
         <button 
           className={`vote-button ${isVoted ? 'voted' : ''}`}
           onClick={() => handleVote(activity.id, activity.votes)}
-          disabled={isVoted}
-          aria-label={isVoted ? 'Voted' : 'Vote for this activity'}
+          aria-label={isVoted ? 'Remove vote' : 'Vote for this activity'}
         >
-          {/* Use different icons based on vote status */}
           {isVoted ? '✅' : '👍'}
         </button>
       </div>

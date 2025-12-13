@@ -163,6 +163,25 @@ export async function voteForActivity(eventId, activityId, participantName) {
 }
 
 /**
+ * Removes a vote from an activity
+ * @param {string} eventId - the event id
+ * @param {string} activityId - the activity ID
+ * @param {string} participantName = the voter's name
+ */
+export async function removeVoteFromActivity(eventId, activityId, participantName) {
+  const activityRef = doc(db, 'events', eventId, 'activities', activityId);
+  const activitySnap = await getDoc(activityRef);
+
+  if (activitySnap.exists()) {
+    const currentVotes = activitySnap.data().votes || [];
+    const updatedVotes = currentVotes.filter((name) => name !== participantName);
+
+    await updateDoc(activityRef, {
+      votes: updatedVotes,
+    });
+  }
+}
+/**
  * fetches all activities for an event
  * @param {string} eventId - the event id
  * @returns {Promise<Array>} - array of activity data with vote counts
