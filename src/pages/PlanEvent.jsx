@@ -1,9 +1,10 @@
 import Navbar from '../components/Navbar';
 import NameInputModal from '../components/NameInputModal';
 import AvailabilityPicker from '../components/AvailabilityPicker';
+import GroupAvailabilityView from '../components/GroupAvailabilityView';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Calendar, ChevronDown, UsersRound, Link2, Heart, Plus } from 'lucide-react';
+import { Calendar, ChevronDown, UsersRound, Link2, Heart, Plus, Eye, Edit3 } from 'lucide-react';
 import {
   getEvent,
   getEventParticipants,
@@ -24,6 +25,8 @@ export default function PlanEvent() {
   const [showDescription, setShowDescription] = useState(true);
   const [copied, setCopied] = useState(false);
 
+  const [viewMode, setViewMode] = useState('edit');
+
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -38,6 +41,8 @@ export default function PlanEvent() {
   // modal state for guest users :D
   const [showNameModal, setShowNameModal] = useState(false);
   const [guestName, setGuestName] = useState('');
+
+  const [participants, setParticipants] = useState([]);
 
   const [eventDates] = useState([
     '2025-12-11',
@@ -60,6 +65,9 @@ export default function PlanEvent() {
         const eventData = await getEvent(eventId);
         setEvent(eventData);
 
+        const allParticiapants = await getEventParticipants(eventId);
+        setParticipants(allParticiapants);
+
         const user = auth.currentUser;
 
         if (user) {
@@ -75,6 +83,9 @@ export default function PlanEvent() {
             });
             setCurrentParticipantId(newId);
             setMyAvailability({});
+
+            const updatedParticipants = await getEventParticipants(eventId);
+            setParticipants(updatedParticipants);
           }
           setCurrentUserName(user.displayName || foundParticipant?.name || 'Anonymous');
         } else {
@@ -124,12 +135,16 @@ export default function PlanEvent() {
       localStorage.setItem(`guest_name_${eventId}`, name);
       localStorage.setItem(`guest_participant_${eventId}`, newId);
 
+      const updatedParticipants = await getEventParticipants(eventId);
+      setParticipants(updatedParticipants);
+
       setShowNameModal(false);
     } catch (err) {
       console.error('Failed to add guest participant', err);
       alert('Failed to join the event :C Try again maybe idk.');
     }
   };
+
   const handleAvailabilitySave = async (newAvailability) => {
     if (!currentParticipantId) {
       alert('You must be logged in to save availability.');
@@ -141,6 +156,9 @@ export default function PlanEvent() {
 
       await updateAvailability(eventId, currentParticipantId, newAvailability);
       console.log('Availability saved to Firestore!');
+
+      const updatedParticipants = await getEventParticipants(eventId);
+      setParticipants(updatedParticipants);
     } catch (err) {
       console.error('Failed to save availability:', err);
     }
@@ -351,14 +369,42 @@ export default function PlanEvent() {
         {/* Body */}
         <div className="createevent-body">
           <div className="availability-section">
-            <h3>Availability</h3>
-            <AvailabilityPicker
-              dates={event.dates}
-              startTime={9}
-              endTime={20.5}
-              initialAvailability={myAvailability}
-              onSave={handleAvailabilitySave}
-            />
+            <div className="availability-header">
+              <h3>Availability</h3>
+              <button
+                className="toggle-view-button"
+                onClick={() => setViewMode(viewMode === 'edit' ? 'view' : 'edit')}
+              >
+                {viewMode === 'edit' ? (
+                  <>
+                    <Eye size={18} />
+                    View Group
+                  </>
+                ) : (
+                  <>
+                    <Edit3 size={18} />
+                    Edit Mine
+                  </>
+                )}
+              </button>
+            </div>
+
+            {viewMode === 'edit' ? (
+              <AvailabilityPicker
+                dates={event.dates}
+                startTime={9}
+                endTime={20.5}
+                initialAvailability={myAvailability}
+                onSave={handleAvailabilitySave}
+              />
+            ) : (
+              <GroupAvailabilityView
+                dates={event.dates}
+                startTime={9}
+                endTime={20.5}
+                participants={participants}
+              />
+            )}
           </div>
 
           <div className="activity-poll-section">
