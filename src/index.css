@@ -12,6 +12,12 @@
   box-sizing: border-box;
 }
 
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
 /* -----------------------------------------
    GLOBAL APP STYLING
 ----------------------------------------- */
@@ -19,7 +25,7 @@ html,
 body {
   width: 100%;
   min-height: 100%;
-  font-family: 'StyreneA', system-ui, Arial, sans-serif;
+  font-family: 'Merriweather', serif;
   background-color: var(--color-bg);
   color: var(--color-text);
 }
@@ -32,6 +38,7 @@ body {
 #root {
   width: 100%;
   min-height: 100vh;
+
 }
 
 /* Links */
@@ -62,7 +69,7 @@ h1 {
 }
 
 p {
-  font-family: 'StyreneA';
+  font-family: 'Merriweather', serif;
   font-weight: 400; /* Regular */
 }
 
