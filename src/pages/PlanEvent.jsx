@@ -1,4 +1,5 @@
 import Navbar from '../components/Navbar';
+import NameInputModal from '../components/NameInputModal';
 import AvailabilityPicker from '../components/AvailabilityPicker';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -22,6 +23,10 @@ export default function PlanEvent() {
   const [activities, setActivities] = useState([]);
   const [newActivity, setNewActivity] = useState('');
   const [currentUserName, setCurrentUserName] = useState('');
+
+  // modal state for guest users :D
+  const [showNameModal, setShowNameModal] = useState(false);
+  const [guestName, setGuestName] = useState('');
 
   const [eventDates] = useState([
     '2025-12-11',
@@ -62,6 +67,24 @@ export default function PlanEvent() {
                 setMyAvailability({});
             }
             setCurrentUserName(user.displayName || foundParticipant?.name || 'Anonymous')
+        } else {
+          // for when user is not logged in :D
+          const savedName = localStorage.getItem(`guest_name_${eventId}`);
+          const savedParticipantId = localStorage.getItem(`guest_participant_${eventId}`);
+
+          if (savedName && savedParticipantId) {
+            setGuestName(savedName);
+            setCurrentUserName(savedName);
+            setCurrentParticipantId(savedParticipantId);
+
+            const participants = await getEventParticipants(eventId);
+            const foundParticipant = participants.find(p => p.id === savedParticipantId);
+            if (foundParticipant) {
+              setMyAvailability(foundParticipant.availability || {});
+            }
+          } else {
+            setShowNameModal(true);
+          }
         }
 
         const fetchedActivities = await getEventActivities(eventId);
@@ -79,6 +102,24 @@ export default function PlanEvent() {
     }
   }, [eventId]);
 
+  const handleNameSubmit = async (name) => {
+    try {
+      const newId = await addParticipant(eventId, { name });
+
+      setGuestName(name);
+      setCurrentUserName(name);
+      setCurrentParticipantId(newId);
+      setMyAvailability({});
+
+      localStorage.setItem(`guest_name_${eventId}`, name);
+      localStorage.setItem(`guest_participant_${eventId}`, newId);
+
+      setShowNameModal(false);
+    } catch (err) {
+      console.error('Failed to add guest participant', err);
+      alert('Failed to join the event :C Try again maybe idk.');
+    }
+  };
   const handleAvailabilitySave = async (newAvailability) => {
     if (!currentParticipantId) {
         alert("You must be logged in to save availability.");
@@ -215,6 +256,10 @@ export default function PlanEvent() {
   return (
     <>
       <Navbar />
+      <NameInputModal
+      isOpen={showNameModal}
+      onSubmit={handleNameSubmit}
+      />
       <div className="createevent-page">
         {/* Header: left = title + description, right = date row + invite */}
         <div className="createevent-header">
@@ -289,7 +334,7 @@ export default function PlanEvent() {
         <button 
           className={`vote-button ${isVoted ? 'voted' : ''}`}
           onClick={() => handleVote(activity.id, activity.votes)}
-          disabled={isVoted} // Disable button if already voted
+          disabled={isVoted}
           aria-label={isVoted ? 'Voted' : 'Vote for this activity'}
         >
           {/* Use different icons based on vote status */}
