@@ -161,3 +161,25 @@ export async function voteForActivity(eventId, activityId, participantName) {
     votes: arrayUnion(participantName),
   });
 }
+
+/**
+ * fetches all activities for an event
+ * @param {string} eventId - the event id
+ * @returns {Promise<Array>} - array of activity data with vote counts
+ */
+export async function getEventActivities(eventId) {
+  const activitiesRef = collection(db, 'events', eventId, 'activities');
+  const activitiesSnap = await getDocs(activitiesRef);
+
+  return activitiesSnap.docs.map((doc) => {
+    const votes = doc.data().votes || [];
+
+    return {
+      id: doc.id,
+      title: doc.data().title,
+      suggestedBy: doc.data().suggestedBy,
+      count: votes.length,
+      votes: votes,
+    };
+  });
+}
