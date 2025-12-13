@@ -67,6 +67,10 @@ h1 {
   font-family: 'StyreneA';
   font-weight: 700; /* Bold */
 }
+h2 {
+  font-family: 'StyreneA';
+  font-weight: 600; /* Bold */
+}
 
 p {
   font-family: 'Merriweather', serif;
