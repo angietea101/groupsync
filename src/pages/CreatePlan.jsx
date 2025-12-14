@@ -72,6 +72,20 @@ export default function PlanEvent() {
       setLoading(false);
     }
   }
+
+  const handleKeyDownSubmit = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
+    }
+  };
+
+  const handleDatePickerKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setShowPicker(true);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -91,6 +105,7 @@ export default function PlanEvent() {
                   placeholder="E.g., Weekend Hike"
                   value={eventName}
                   onChange={(e) => setEventaName(e.target.value)}
+                  onKeyDown={handleKeyDownSubmit}
                 />
               </div>
 
@@ -102,31 +117,33 @@ export default function PlanEvent() {
                   placeholder="Add more details about the event..."
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
+                  onKeyDown={handleKeyDownSubmit}
                 ></textarea>
               </div>
 
               <div className="date-picker-wrapper">
-                <div className="date-picker-wrapper">
-                  <label>
-                    Event Dates <span className="required">*</span>
-                  </label>
-
-                  <div className="date-input-display" onClick={() => setShowPicker(true)}>
-                    <span className={eventDates.startDate ? 'filled' : 'placeholder'}>
-                      {eventDates.startDate
-                        ? `${eventDates.startDate} → ${eventDates.endDate}`
-                        : 'Select Your Dates'}
-                    </span>
-                    <Calendar size={18} className="calendar-icon" />
-                  </div>
-
-                  <input
-                    type="hidden"
-                    name="eventDates"
-                    required
-                    value={JSON.stringify(eventDates)}
-                  />
+                <label>
+                  Event Dates <span className="required">*</span>
+                </label>
+                <div
+                  className="date-input-display"
+                  tabIndex={0}
+                  onClick={() => setShowPicker(true)}
+                  onKeyDown={handleDatePickerKeyDown}
+                >
+                  <span className={eventDates.startDate ? 'filled' : 'placeholder'}>
+                    {eventDates.startDate
+                      ? `${eventDates.startDate} → ${eventDates.endDate}`
+                      : 'Select Your Dates'}
+                  </span>
+                  <Calendar size={18} className="calendar-icon" />
                 </div>
+                <input
+                  type="hidden"
+                  name="eventDates"
+                  required
+                  value={JSON.stringify(eventDates)}
+                />
               </div>
 
               {error && <p className="error-msg">{error}</p>}
@@ -139,14 +156,12 @@ export default function PlanEvent() {
         </div>
       </div>
       {showPicker && (
-        <>
-          <div className="datepicker-modal" ref={pickerRef}>
-            <DateRangePicker
-              initialDates={eventDates.dates}
-              onChange={(newDates) => setEventDates(newDates)}
-            />
-          </div>
-        </>
+        <div className="datepicker-modal" ref={pickerRef}>
+          <DateRangePicker
+            initialDates={eventDates.dates}
+            onChange={(newDates) => setEventDates(newDates)}
+          />
+        </div>
       )}
     </>
   );
