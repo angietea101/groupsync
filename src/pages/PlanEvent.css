@@ -116,7 +116,7 @@
   opacity: 0;
   font-size: var(--font-md);
   margin-top: 0;
-  color: var(--color-border);
+  color: var(--color-dark-gray);
   transition:
     max-height 0.25s ease,
     opacity 0.2s ease,

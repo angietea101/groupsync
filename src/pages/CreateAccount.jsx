@@ -80,6 +80,7 @@ export default function CreateAccount() {
             placeholder="John Doe"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleCreateAccount()}
           />
 
           <label>Email Address</label>
@@ -88,6 +89,7 @@ export default function CreateAccount() {
             placeholder="john@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleCreateAccount()}
           />
 
           <label>Password</label>
@@ -97,11 +99,19 @@ export default function CreateAccount() {
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleCreateAccount()}
             />
+
             <button
               type="button"
               className="password-toggle-btn"
               onClick={() => setShowPassword(!showPassword)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setShowPassword(!showPassword);
+                }
+              }}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -134,6 +144,7 @@ export default function CreateAccount() {
             className="create-btn"
             disabled={!isFormValid || loading}
             onClick={handleCreateAccount}
+            onKeyDown={(e) => e.key === 'Enter' && handleCreateAccount()}
           >
             {loading ? 'Creating...' : 'Create Account'}
           </button>

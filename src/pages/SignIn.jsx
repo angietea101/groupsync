@@ -9,6 +9,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import Footer from '../components/Footer';
 import { auth } from '../services/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+
 export default function SignIn() {
   const navigate = useNavigate();
 
@@ -16,13 +17,15 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-
   const [loading, setLoading] = useState(false);
 
   const isFormValid = email.trim().length > 0 && password.trim().length > 0;
 
   const handleSignIn = async () => {
+    if (!isFormValid) return;
+
     setError('');
+    setLoading(true);
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -30,6 +33,14 @@ export default function SignIn() {
     } catch (err) {
       setError('Invalid email or password');
       console.error('Sign-in error:', err);
+    }
+
+    setLoading(false);
+  };
+
+  const handleKeyDownSubmit = (e) => {
+    if (e.key === 'Enter') {
+      handleSignIn();
     }
   };
 
@@ -47,6 +58,7 @@ export default function SignIn() {
             placeholder="john@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={handleKeyDownSubmit}
           />
 
           <label>Password</label>
@@ -56,20 +68,32 @@ export default function SignIn() {
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleKeyDownSubmit}
             />
             <button
               type="button"
               className="password-toggle-btn"
               onClick={() => setShowPassword(!showPassword)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setShowPassword(!showPassword);
+                }
+              }}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
 
-          {error && <p style={{ color: 'red', fontSize: 14 }}>{error}</p>}
+          {error && <p style={{ color: 'red', fontSize: 14, textAlign: 'center' }}>{error}</p>}
 
-          <button className="create-btn" disabled={!isFormValid || loading} onClick={handleSignIn}>
+          <button
+            className="create-btn"
+            disabled={!isFormValid || loading}
+            onClick={handleSignIn}
+            onKeyDown={(e) => e.key === 'Enter' && handleSignIn()}
+          >
             {loading ? 'Loading...' : 'Sign In'}
           </button>
 
