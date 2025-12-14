@@ -373,6 +373,8 @@ export default function PlanEvent() {
                 {copied ? 'Copied' : 'Copy Invite Link'}
               </button>
             </div>
+
+            <div className="header-divider" />
           </div>
         </div>
 
