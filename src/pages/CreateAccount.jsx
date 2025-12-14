@@ -22,6 +22,8 @@ export default function CreateAccount() {
   const [showPassword, setShowPassword] = useState(false);
 
   const [error, setError] = useState('');
+  const isFormValid =
+    fullName.trim().length > 0 && email.trim().length > 0 && password.trim().length > 0 && agree;
   const [loading, setLoading] = useState(false);
 
   async function handleCreateAccount() {
@@ -91,22 +93,18 @@ export default function CreateAccount() {
           <label>Password</label>
           <div className="password-input-wrapper">
             <input
-            type={showPassword ? "text" : "password"}
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <button
-            type="button"
-            className="password-toggle-btn"
-            onClick={() => setShowPassword(!showPassword)}
-            aria-label={showPassword ? "Hide password" : "Show password"}
+              type="button"
+              className="password-toggle-btn"
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
-              {showPassword ? (
-                <EyeOff size={20}/>
-              ) : (
-                <Eye size={20} />
-              )}
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
 
@@ -132,7 +130,11 @@ export default function CreateAccount() {
 
           {error && <p className="error-msg">{error}</p>}
 
-          <button className="create-btn" onClick={handleCreateAccount} disabled={loading}>
+          <button
+            className="create-btn"
+            disabled={!isFormValid || loading}
+            onClick={handleCreateAccount}
+          >
             {loading ? 'Creating...' : 'Create Account'}
           </button>
 

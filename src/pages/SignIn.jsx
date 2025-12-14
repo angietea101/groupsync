@@ -16,6 +16,11 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+
+  const isFormValid = email.trim().length > 0 && password.trim().length > 0;
+
   const handleSignIn = async () => {
     setError('');
 
@@ -58,18 +63,14 @@ export default function SignIn() {
               onClick={() => setShowPassword(!showPassword)}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
-              {showPassword ? (
-                <EyeOff size={20} />
-              ) : (
-                <Eye size={20} />
-              )}
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
 
           {error && <p style={{ color: 'red', fontSize: 14 }}>{error}</p>}
 
-          <button className="create-btn" onClick={handleSignIn}>
-            Sign In
+          <button className="create-btn" disabled={!isFormValid || loading} onClick={handleSignIn}>
+            {loading ? 'Loading...' : 'Sign In'}
           </button>
 
           <div className="divider">

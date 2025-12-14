@@ -105,12 +105,9 @@
   opacity: 0.9;
 }
 
-/* Disabled Create button (token-based) */
 .createplan-btn:disabled {
-  background: var(--color-primary-light);
-  color: var(--color-border);
-  cursor: not-allowed;
-  opacity: 1;
+  color: var(--color-black);
+  background-color: var(--color-primary-disabled);
   box-shadow: none;
 }
 

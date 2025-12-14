@@ -113,6 +113,12 @@
   justify-content: center;
 }
 
+.create-btn:disabled {
+  color: var(--color-black);
+  background-color: var(--color-primary-disabled);
+  box-shadow: none;
+}
+
 /* Divider with lines */
 .divider {
   display: flex;

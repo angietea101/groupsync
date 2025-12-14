@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Calendar, Vote, Share2 } from 'lucide-react';
+
+import { auth } from '../services/firebase';
 
 import WatchIcon from '../assets/watch-icon.svg';
 import PlusIcon from '../assets/plus.svg';
@@ -11,6 +14,9 @@ import GroupIcon from '../assets/group.svg';
 import CheckmarkIcon from '../assets/checkmark.svg';
 
 export default function Home() {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries, observer) => {
@@ -29,6 +35,14 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged((u) => {
+      setUser(u);
+    });
+
+    return () => unsub();
+  }, []);
+
   return (
     <div className="home-container">
       <Navbar />
@@ -43,12 +57,19 @@ export default function Home() {
           decisions has never been this simple.
         </p>
         <div className="hero-buttons">
-          <Link to="/createaccount">
-            <button className="reveal animate-slide-in-left start-planning hover-lift">
-              Start Planning
-            </button>
-          </Link>
-          <button className="reveal animate-slide-in-right watch-demo hover-lift">
+          <button
+            onClick={() => {
+              if (user) {
+                navigate('/createplan');
+              } else {
+                navigate('/createaccount');
+              }
+            }}
+            className="reveal animate-slide-in-left start-planning hover-lift"
+          >
+            Start Planning
+          </button>
+          <button className="reveal animate-slide-in-right watch-demo">
             <img src={WatchIcon} alt="Watch icon" className="watch-icon" />
             Watch Demo
           </button>
