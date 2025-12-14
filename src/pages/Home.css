@@ -1,5 +1,115 @@
 @import '../styles/variables.css';
 
+#root,
+.home-container {
+  overflow-x: hidden;
+}
+
+/* Reveal base class */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}
+
+/* When intersected */
+.reveal.has-animated {
+  opacity: 1;
+  transform: none;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation classes */
+.animate-fade-in-up.has-animated {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+.animate-fade-in-down.has-animated {
+  animation: fadeInDown 0.8s ease-out forwards;
+}
+.animate-scale-in.has-animated {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+.animate-slide-in-left.has-animated {
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+.animate-slide-in-right.has-animated {
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
+/* Delay helpers */
+.animation-delay-100 {
+  animation-delay: 0.1s;
+}
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+.animation-delay-300 {
+  animation-delay: 0.3s;
+}
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+.animation-delay-500 {
+  animation-delay: 0.5s;
+}
+.animation-delay-600 {
+  animation-delay: 0.6s;
+}
+
 .text-primary {
   color: var(--color-primary-dark);
 }
@@ -309,69 +419,7 @@
   }
 }
 
-/* Animations :D */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-1000px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(1000px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0px);
@@ -382,40 +430,14 @@
   }
 }
 
-.animation-ready {
-  opacity: 0;
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.animate-fade-in-down {
-  animation: fadeInDown 0.8s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.6s ease-out forwards;
-}
-
-.animate-slide-in-left {
-  animation: slideInLeft 0.8s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.8s ease-out forwards;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
 /* Hover Effects */
 .hover-lift {
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .hover-lift:hover {
@@ -432,28 +454,4 @@
 
 .icon-hover:hover {
   transform: rotate(10deg) scale(1.1);
-}
-
-.animation-delay-100 {
-  animation-delay: 0.1s;
-}
-
-.animation-delay-200 {
-  animation-delay: 0.2s;
-}
-
-.animation-delay-300 {
-  animation-delay: 0.3s;
-}
-
-.animation-delay-400 {
-  animation-delay: 0.4s;
-}
-
-.animation-delay-500 {
-  animation-delay: 0.5s;
-}
-
-.animation-delay-600 {
-  animation-delay: 0.6s;
 }
