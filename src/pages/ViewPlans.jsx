@@ -85,6 +85,10 @@ export default function ViewPlans() {
   const handlePlanClick = (planId) => {
     navigate(`/planevent/${planId}`);
   };
+
+  const handleCreatePlan = () => {
+    navigate('/createplan');
+  };
   const plansDisplay = activeTab === 'Current Plans' ? currentPlans : pastPlans;
 
   return (
@@ -153,7 +157,9 @@ export default function ViewPlans() {
         </div>
 
         {/* Floating Add Button */}
-        <button className="floating-add-btn">+</button>
+        <button className="floating-add-btn" onClick={() => handleCreatePlan()}>
+          +
+        </button>
       </div>
     </>
   );
