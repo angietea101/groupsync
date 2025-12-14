@@ -23,11 +23,14 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
 }
+
 input,
 textarea,
-select {
+select,
+button {
   font-family: inherit;
 }
+
 body {
   display: block;
 }
@@ -36,7 +39,6 @@ body {
 #root {
   width: 100%;
   min-height: 100vh;
-
 }
 
 /* Links */
@@ -47,7 +49,6 @@ a {
 
 /* Buttons */
 button {
-  font-family: inherit;
   cursor: pointer;
   background-color: var(--color-primary);
   color: var(--color-white);
@@ -60,35 +61,41 @@ button:hover {
   background-color: var(--color-primary-hover);
 }
 
-/* Typography */
+/* -----------------------------------------
+   TYPOGRAPHY (MERRIWEATHER)
+----------------------------------------- */
+
+/* Headings */
 h1 {
-  font-family: 'StyreneA';
-  font-weight: 700; /* Bold */
+  font-weight: 700;
 }
+
 h2 {
-  font-family: 'StyreneA';
-  font-weight: 600; /* Bold */
+  font-weight: 700;
 }
+
 h3 {
-  font-family: 'StyreneA';
-  font-weight: 500; /* Bold */
+  font-weight: 400;
 }
 
+/* Body text */
 p {
-  font-family: 'Merriweather', serif;
-  font-weight: 400; /* Regular */
+  font-weight: 400;
+  line-height: 1.6;
 }
 
-span.medium {
-  font-family: 'StyreneA';
-  font-weight: 500; /* Medium */
+/* Utility text */
+.medium {
+  font-weight: 700;
 }
 
-div, 
+/* Ensure inheritance consistency */
+div,
 span {
-    font-family: inherit; 
+  font-family: inherit;
 }
 
+/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
