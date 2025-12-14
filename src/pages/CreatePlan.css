@@ -3,6 +3,7 @@
   position: relative;
   padding-left: clamp(1rem, 6vw, 3rem);
   padding-right: clamp(1rem, 6vw, 3rem);
+  background-color: var(--color-primary-light);
 }
 
 .createplan-container {
@@ -113,7 +114,6 @@
 
 /* Prevent hover styles when disabled */
 .createplan-btn:disabled:hover {
-  background: var(--color-primary-light);
   opacity: 1;
 }
 

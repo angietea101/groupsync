@@ -88,10 +88,15 @@
   color: var(--color-text);
   font-weight: 500;
   transition: color 0.25s ease;
+  font-size: var(--font-md);
 }
 
 .sign-in:hover {
   color: var(--color-primary);
+}
+
+button {
+  font-size: var(--font-md);
 }
 
 .mobile-menu-icon {
