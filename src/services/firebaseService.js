@@ -2,6 +2,8 @@ import { db, auth } from './firebase';
 import {
   collection,
   doc,
+  query,
+  where,
   setDoc,
   getDoc,
   getDocs,
@@ -201,4 +203,23 @@ export async function getEventActivities(eventId) {
       votes: votes,
     };
   });
+}
+
+/**
+ * fetches all events created by a specific user
+ * @param {string} userId - the id of the user
+ * @returns {Promise<Array>} - array of event objects
+ */
+export async function getUserEvents(userId) {
+  if (!userId) return [];
+
+  const eventsRef = collection(db, 'events');
+  const q = query(eventsRef, where('creatorId', '==', userId));
+
+  const querySnapshot = await getDocs(q);
+
+  return querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
 }
