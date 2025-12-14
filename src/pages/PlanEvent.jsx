@@ -24,6 +24,7 @@ export default function PlanEvent() {
 
   const [showDescription, setShowDescription] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [addingActivity, setAddingActivity] = useState(false);
 
   const [viewMode, setViewMode] = useState('edit');
 
@@ -164,12 +165,16 @@ export default function PlanEvent() {
     }
   };
 
-  const handleActivitySuggest = async (e) => {
-    if (e.key !== 'Enter' || newActivity.trim() === '') return;
+  const handleActivitySuggest = async () => {
+    if (newActivity.trim() === '' || addingActivity) return;
 
     try {
+      setAddingActivity(true);
+
+      const title = newActivity.trim();
+
       const activityId = await addActivity(eventId, {
-        title: newActivity.trim(),
+        title,
         suggestedBy: currentUserName,
       });
 
@@ -178,7 +183,7 @@ export default function PlanEvent() {
           ...prev,
           {
             id: activityId,
-            title: newActivity.trim(),
+            title,
             suggestedBy: currentUserName,
             count: 0,
             votes: [],
@@ -189,6 +194,8 @@ export default function PlanEvent() {
       setNewActivity('');
     } catch (err) {
       console.error('Failed to suggest activity:', err);
+    } finally {
+      setAddingActivity(false);
     }
   };
 
@@ -459,18 +466,20 @@ export default function PlanEvent() {
                 className="activity-input"
                 value={newActivity}
                 onChange={(e) => setNewActivity(e.target.value)}
-                onKeyDown={handleActivitySuggest}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleActivitySuggest();
+                  }
+                }}
               />
               <button
                 className="add-activity-button"
-                onClick={() => {
-                  if (newActivity.trim()) {
-                    handleActivitySuggest({ key: 'Enter' });
-                  }
-                }}
+                onClick={handleActivitySuggest}
+                disabled={!newActivity.trim() || addingActivity}
                 aria-label="Add activity"
               >
-                <Plus size={22} />
+                {addingActivity ? <span className="button-spinner" /> : <Plus size={22} />}
               </button>
             </div>
           </div>
