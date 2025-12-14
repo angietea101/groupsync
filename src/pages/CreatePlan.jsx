@@ -17,11 +17,18 @@ export default function PlanEvent() {
     dates: [],
   });
 
+  const isFormValid =
+    eventName.trim().length > 0 && eventDates.dates && eventDates.dates.length > 0;
+
   const [showPicker, setShowPicker] = useState(false);
   const pickerRef = useRef(null);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (isFormValid) setError('');
+  }, [eventName, eventDates]);
 
   // Close when clicking outside
   useEffect(() => {
@@ -124,7 +131,7 @@ export default function PlanEvent() {
 
               {error && <p className="error-msg">{error}</p>}
 
-              <button type="submit" className="createplan-btn" disabled={loading}>
+              <button type="submit" className="createplan-btn" disabled={!isFormValid || loading}>
                 {loading ? 'Loading...' : 'Create'}
               </button>
             </form>

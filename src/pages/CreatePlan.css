@@ -93,10 +93,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.1s ease;
 }
 
 .createplan-btn:hover {
   opacity: 0.9;
+}
+
+/* Disabled Create button (token-based) */
+.createplan-btn:disabled {
+  background: var(--color-primary-light);
+  color: var(--color-border);
+  cursor: not-allowed;
+  opacity: 1;
+  box-shadow: none;
+}
+
+/* Prevent hover styles when disabled */
+.createplan-btn:disabled:hover {
+  background: var(--color-primary-light);
+  opacity: 1;
+}
+
+.createplan-btn:disabled:active {
+  transform: none;
 }
 
 .back-global {
