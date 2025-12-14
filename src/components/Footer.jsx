@@ -19,9 +19,9 @@ export default function Footer() {
       </Link>
 
       <div className="footer-right">
-        <Link to="/privacy">Privacy</Link>
-        <Link to="/terms">Terms</Link>
-        <Link to="/support">Support</Link>
+        <span>Privacy</span>
+        <span>Terms</span>
+        <span>Support</span>
       </div>
     </footer>
   );

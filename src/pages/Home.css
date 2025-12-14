@@ -244,7 +244,7 @@
 }
 
 .hero-buttons button {
-  padding: 0.75rem 2.5rem;
+  padding: 1rem 3rem;
   background-color: var(--color-primary);
   color: var(--color-white);
   border: none;
@@ -252,6 +252,7 @@
   text-align: center;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  font-weight: 500;
 }
 
 .hero-buttons button:hover {
@@ -314,6 +315,7 @@
   align-items: center;
   text-align: center;
   padding: var(--space-lg);
+  margin-top: 2rem;
 }
 
 .feature-icon-container {
@@ -335,6 +337,14 @@
   font-size: var(--font-lg);
   font-weight: 600;
   margin-bottom: var(--space-sm);
+}
+
+.features p {
+  margin-top: 1rem;
+}
+
+.works p {
+  margin-top: 1rem;
 }
 
 .feature-item p {

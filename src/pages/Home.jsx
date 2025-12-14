@@ -77,7 +77,7 @@ export default function Home() {
       </section>
 
       {/* FEATURES SECTION */}
-      <section className="features">
+      <section id="features" className="features">
         <h2 className="reveal animate-fade-in-up">Everything you need</h2>
         <p className="reveal animate-fade-in-up animation-delay-100">
           Powerful features that make group event planning effortless and enjoyable
@@ -120,7 +120,7 @@ export default function Home() {
       </section>
 
       {/* HOW IT WORKS SECTION */}
-      <section className="works">
+      <section id="how-it-works" className="works">
         <h2 className="reveal animate-fade-in-up">How it Works</h2>
         <p className="reveal animate-fade-in-up animation-delay-200">
           Three simple steps to organize the perfect group event.

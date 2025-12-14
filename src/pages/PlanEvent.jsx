@@ -488,7 +488,7 @@ export default function PlanEvent() {
         </div>
 
         <div className="footer-responded">
-          RESPONDED:
+          Responded:
           {invited.map((name, i) => (
             <span key={i}>{name}</span>
           ))}

@@ -37,7 +37,7 @@
 .slot-count {
   font-size: 0.7rem;
   font-weight: 600;
-  color: rgba(0, 0, 0, 0.7);
+  color: #fff;
   pointer-events: none;
 }
 

@@ -5,7 +5,6 @@
 /* --- PAGE BASE --- */
 .createevent-page {
   margin: var(--space-lg) var(--space-xxxxl);
-  font-family: sans-serif;
   background: var(--color-bg);
   color: var(--color-text);
 }
