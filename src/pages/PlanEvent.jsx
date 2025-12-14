@@ -452,7 +452,7 @@ export default function PlanEvent() {
             </AnimatePresence>
 
             {/* Suggestion Input */}
-            <div style={{ position: 'relative', width: '100%' }}>
+            <div className="activity-input-row">
               <input
                 type="text"
                 placeholder="Suggest an activity..."
@@ -470,7 +470,7 @@ export default function PlanEvent() {
                 }}
                 aria-label="Add activity"
               >
-                <Plus size={25} />
+                <Plus size={22} />
               </button>
             </div>
           </div>
