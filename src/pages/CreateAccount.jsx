@@ -59,7 +59,7 @@ export default function CreateAccount() {
       });
 
       // Redirect to dashboard
-      navigate('/viewevents');
+      navigate('/viewplans');
     } catch (err) {
       setError(err.message);
     }

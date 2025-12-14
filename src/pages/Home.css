@@ -216,6 +216,7 @@
   align-items: center;
   padding: var(--space-xxl) var(--space-xl);
   width: 100%;
+  background-color: var(--color-bg);
 }
 
 .hero h1 {

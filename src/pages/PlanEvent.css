@@ -7,13 +7,14 @@
   margin: var(--space-lg) var(--space-xxxxl);
   background: var(--color-bg);
   color: var(--color-text);
+  background-color: var(--color-primary-light);
 }
 
 /* --- HEADER --- */
 .createevent-header {
   width: 100%;
   display: flex;
-  flex-direction: column; /* stack by default */
+  flex-direction: column;
   margin-bottom: var(--space-md);
   gap: 0.5rem;
 }

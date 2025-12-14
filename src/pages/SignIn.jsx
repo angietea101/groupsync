@@ -29,7 +29,7 @@ export default function SignIn() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/viewevents'); // redirect when successful
+      navigate('/viewplans'); // redirect when successful
     } catch (err) {
       setError('Invalid email or password');
       console.error('Sign-in error:', err);

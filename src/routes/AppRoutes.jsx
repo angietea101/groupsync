@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import SignIn from '../pages/SignIn';
 import CreateAccount from '../pages/CreateAccount';
-import ViewEvents from '../pages/ViewEvents';
+import ViewPlans from '../pages/ViewPlans';
 import PlanEvent from '../pages/PlanEvent';
 import CreatePlan from '../pages/CreatePlan';
 
@@ -16,7 +16,7 @@ export default function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/createaccount" element={<CreateAccount />} />
-        <Route path="/viewevents" element={<ViewEvents />} />
+        <Route path="/viewplans" element={<ViewPlans />} />
         <Route path="/createplan" element={<CreatePlan />} />
 
         <Route path="/planevent/:eventId" element={<PlanEvent />} />

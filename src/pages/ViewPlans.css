@@ -1,0 +1,101 @@
+.plans-page {
+  min-height: calc(90vh - 80px);
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Toggle Buttons */
+.plans-toggle {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.toggle-btn {
+  padding: 0.75rem 2.5rem;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--color-primary);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.toggle-btn.active {
+  background-color: var(--color-primary-active);
+}
+
+.toggle-btn:hover {
+  transform: translateY(-1px);
+  background-color: var(--color-primary-hover);
+}
+
+/* Plans List */
+.plans-list {
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Plan Card */
+.plan-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid #b5b2a8;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.plan-title {
+  margin: 0;
+  color: #e38b64;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.plan-date {
+  font-size: 0.75rem;
+  color: var(--color-light-gray);
+  margin: 0.25rem 0 0.5rem;
+}
+
+.plan-desc {
+  font-size: 0.85rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* Floating Add Button */
+.floating-add-btn {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: white;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease;
+}
+
+.floating-add-btn:hover {
+  background-color: var(--color-primary-hover);
+  transform: scale(1.05);
+}

@@ -59,11 +59,11 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <Link to="/viewevents" className="sign-in">
-                View Events
+              <Link to="/viewplans" className="sign-in">
+                View Plans
               </Link>
               <Link to="/createplan">
-                <button className="get-started">Plan Event</button>
+                <button className="get-started">Create Plan</button>
               </Link>
             </>
           )}
@@ -100,7 +100,7 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link to="/viewevents" className="mobile-sign-in" onClick={closeMobileMenu}>
+                <Link to="/viewplans" className="mobile-sign-in" onClick={closeMobileMenu}>
                   View Events
                 </Link>
                 <Link to="/createplan" onClick={closeMobileMenu}>

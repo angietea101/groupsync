@@ -20,7 +20,7 @@ body {
   width: 100%;
   min-height: 100%;
   font-family: 'Merriweather', serif;
-  background-color: var(--color-bg);
+  background-color: var(--color-primary-light);
   color: var(--color-text);
 }
 
