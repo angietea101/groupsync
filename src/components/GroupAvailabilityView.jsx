@@ -69,7 +69,7 @@ const GroupAvailabilityView = ({
 
     const intensity = count / maxParticipants;
 
-    if (intensity === 1) return '#da7756';
+    if (intensity === 1) return 'var(--color-primary)';
     if (intensity >= 0.75) return '#D98E75';
     if (intensity >= 0.5) return '#D49C87';
     if (intensity >= 0.25) return '#DDAC9C';

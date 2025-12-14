@@ -12,12 +12,6 @@
   box-sizing: border-box;
 }
 
-input,
-textarea,
-select {
-  font-family: inherit;
-}
-
 /* -----------------------------------------
    GLOBAL APP STYLING
 ----------------------------------------- */
@@ -29,7 +23,11 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
 }
-
+input,
+textarea,
+select {
+  font-family: inherit;
+}
 body {
   display: block;
 }
@@ -71,6 +69,10 @@ h2 {
   font-family: 'StyreneA';
   font-weight: 600; /* Bold */
 }
+h3 {
+  font-family: 'StyreneA';
+  font-weight: 500; /* Bold */
+}
 
 p {
   font-family: 'Merriweather', serif;
@@ -80,6 +82,11 @@ p {
 span.medium {
   font-family: 'StyreneA';
   font-weight: 500; /* Medium */
+}
+
+div, 
+span {
+    font-family: inherit; 
 }
 
 html {
