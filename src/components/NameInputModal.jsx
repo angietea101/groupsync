@@ -16,7 +16,7 @@ export default function NameInputModal({ isOpen, onSubmit}) {
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                <h2>Welcome! 👋</h2>
+                <h2>Welcome!</h2>
                 <p>Please enter your name to join this event</p>
                 <form onSubmit={handleSubmit}>
                 <input

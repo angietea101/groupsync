@@ -356,6 +356,10 @@ h3 {
   min-height: auto;
 }
 
+.footer-responded span.has-responded {
+  background-color: #267326;
+}
+
 .footer-responded span {
   padding: 0.5rem 0.75rem;
   border-radius: 9999px;
@@ -364,10 +368,6 @@ h3 {
   background-color: #888888;
   white-space: nowrap;
   font-weight: 300;
-}
-
-.footer-responded span:first-child {
-  background-color: #267326;
 }
 
 /* --- MEDIA QUERIES --- */

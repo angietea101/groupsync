@@ -366,7 +366,7 @@ export default function PlanEvent() {
                 <Calendar />
                 <span className="event-info-text">{formatDateRange()} ·</span>
                 <UsersRound />
-                <span> {invited.length} invited</span>
+                <span> {participants.length} invited</span>
               </div>
               <button className="invite-button" onClick={handleClick}>
                 <Link2 />
@@ -489,9 +489,15 @@ export default function PlanEvent() {
 
         <div className="footer-responded">
           Responded:
-          {invited.map((name, i) => (
-            <span key={i}>{name}</span>
-          ))}
+          {participants.map((participant) => {
+            const hasAvailability =
+              participant.availability && Object.keys(participant.availability).length > 0;
+            return (
+              <span key={participant.id} className={hasAvailability ? 'has-responded' : ''}>
+                {participant.name}
+              </span>
+            );
+          })}
         </div>
       </div>
     </>
