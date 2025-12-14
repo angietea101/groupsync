@@ -8,8 +8,8 @@
 }
 
 .navbar-container {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   padding: var(--space-md) var(--space-xxl);
   width: 100%;
@@ -40,6 +40,10 @@
   gap: 0.5rem;
   text-decoration: none;
   color: inherit;
+}
+
+.navbar-center {
+  justify-self: center;
 }
 
 .navbar-center a {

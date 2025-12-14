@@ -297,8 +297,11 @@ export default function PlanEvent() {
     return (
       <>
         <Navbar />
-        <div className="createevent=page">
-          <p>Loading event...</p>
+        <div className="event-loading-page">
+          <div className="event-loading-card">
+            <span className="event-spinner" />
+            <p>Loading event…</p>
+          </div>
         </div>
       </>
     );

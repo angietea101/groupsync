@@ -6,13 +6,16 @@ import './Navbar.css';
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   useEffect(() => {
     const unsub = auth.onAuthStateChanged((u) => {
       setUser(u);
+      setAuthLoading(false);
     });
+
     return () => unsub();
   }, []);
 
@@ -43,7 +46,9 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-right desktop-only">
-          {!user ? (
+          {authLoading ? (
+            <div style={{ height: '40px', width: '160px' }} />
+          ) : !user ? (
             <>
               <Link to="/signin" className="sign-in">
                 Sign In
@@ -83,25 +88,26 @@ export default function Navbar() {
         </div>
 
         <div className="mobile-auth">
-          {!user ? (
-            <>
-              <Link to="/signin" className="mobile-sign-in" onClick={closeMobileMenu}>
-                Sign In
-              </Link>
-              <Link to="/createaccount" onClick={closeMobileMenu}>
-                <button className="get-started mobile-btn">Get Started</button>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link to="/viewevents" className="mobile-sign-in" onClick={closeMobileMenu}>
-                View Events
-              </Link>
-              <Link to="/createplan" onClick={closeMobileMenu}>
-                <button className="get-started mobile-btn">Plan Events</button>
-              </Link>
-            </>
-          )}
+          {!authLoading &&
+            (!user ? (
+              <>
+                <Link to="/signin" className="mobile-sign-in" onClick={closeMobileMenu}>
+                  Sign In
+                </Link>
+                <Link to="/createaccount" onClick={closeMobileMenu}>
+                  <button className="get-started mobile-btn">Get Started</button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/viewevents" className="mobile-sign-in" onClick={closeMobileMenu}>
+                  View Events
+                </Link>
+                <Link to="/createplan" onClick={closeMobileMenu}>
+                  <button className="get-started mobile-btn">Plan Events</button>
+                </Link>
+              </>
+            ))}
         </div>
       </div>
     </nav>
