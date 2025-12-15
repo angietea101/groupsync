@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { auth } from '../services/firebase';
 import { Menu, X, User, LogOut } from 'lucide-react';
 import './Navbar.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -41,7 +43,7 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       await auth.signOut();
-      navigate('/signin'); // redirect after logout
+      navigate('/'); // redirect after logout
     } catch (err) {
       console.error('Logout error:', err);
     }
