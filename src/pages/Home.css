@@ -192,7 +192,7 @@
 
 /* HERO SECTION */
 .hero {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -342,7 +342,7 @@
 
 /* HOW IT WORKS SECTION */
 .works {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh);
   width: 100%;
   padding: var(--space-xxxl) var(--space-xl);
   text-align: center;

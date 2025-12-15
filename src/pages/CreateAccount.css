@@ -1,6 +1,6 @@
 /* Entire area under navbar */
 .create-container {
-  min-height: calc(90vh - 80px);
+  min-height: calc(100vh);
   display: flex;
   justify-content: center;
   align-items: center;

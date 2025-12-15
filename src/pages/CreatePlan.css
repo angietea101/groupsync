@@ -7,7 +7,7 @@
 }
 
 .createplan-container {
-  min-height: calc(90vh - 80px);
+  min-height: calc(100vh - 72px);
   display: flex;
   justify-content: center;
   align-items: center;

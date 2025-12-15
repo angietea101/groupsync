@@ -85,7 +85,14 @@ export default function Navbar() {
         <div className="navbar-center desktop-only">
           <Link to="/#features">Features</Link>
           <Link to="/#how-it-works">How it Works</Link>
-          <Link to="/team">Team</Link>
+          <Link
+            to="/team"
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            Team
+          </Link>
         </div>
 
         <div className="navbar-right desktop-only">
@@ -149,7 +156,13 @@ export default function Navbar() {
           <Link to="/#how-it-works" onClick={closeMobileMenu}>
             How it Works
           </Link>
-          <Link to="/team" onClick={closeMobileMenu}>
+          <Link
+            to="/team"
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              closeMobileMenu();
+            }}
+          >
             Team
           </Link>
         </div>

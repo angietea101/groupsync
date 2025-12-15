@@ -6,7 +6,7 @@
 
 /* Hero Section */
 .about-hero {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh);
   display: flex;
   flex-direction: column;
   justify-content: center;

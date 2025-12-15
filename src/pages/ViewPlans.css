@@ -1,5 +1,7 @@
 .plans-page {
-  min-height: calc(90vh - 80px);
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+  min-height: calc(100vh);
   padding: 3rem 1rem;
   display: flex;
   flex-direction: column;

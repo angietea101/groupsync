@@ -4,6 +4,8 @@
 
 /* --- PAGE BASE --- */
 .createevent-page {
+  padding-top: 6rem;
+
   margin-block: var(--space-lg);
   margin-inline: auto;
 
@@ -430,7 +432,7 @@ h3 {
 
 /* --- LOADING STATE --- */
 .event-loading-page {
-  min-height: calc(100vh - 80px); /* keeps Navbar visible */
+  min-height: calc(100vh);
   display: flex;
   align-items: center;
   justify-content: center;
