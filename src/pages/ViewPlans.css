@@ -92,15 +92,15 @@
   position: fixed;
   bottom: 2.5rem;
   right: 2.5rem;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background-color: var(--color-primary);
   color: white;
   font-size: 2rem;
   border: none;
   cursor: pointer;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
