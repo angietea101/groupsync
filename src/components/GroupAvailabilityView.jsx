@@ -96,6 +96,27 @@ const GroupAvailabilityView = ({
     ),
     [timeSlots]
   );
+
+  const getContrastTextColor = (bgColor) => {
+    // Handle CSS variables by resolving them
+    if (bgColor.startsWith('var(')) {
+      const varName = bgColor.match(/var\(([^)]+)\)/)[1];
+      bgColor = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+    }
+
+    // Convert hex to RGB
+    const hex = bgColor.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+
+    // Relative luminance formula
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+    // Light background → black text, dark background → white text
+    return luminance > 0.6 ? '#000' : '#fff';
+  };
+
   return (
     <div className="group-availability-wrapper">
       <div className="group-availability-card">
@@ -126,7 +147,14 @@ const GroupAvailabilityView = ({
                       style={{ backgroundColor }}
                       title={`${count} / ${maxParticipants} available`}
                     >
-                      {count > 0 && <span className="slot-count">{count}</span>}
+                      {count > 0 && (
+                        <span
+                          className="slot-count"
+                          style={{ color: getContrastTextColor(backgroundColor) }}
+                        >
+                          {count}
+                        </span>
+                      )}
                     </div>
                   );
                 })}
