@@ -77,3 +77,28 @@
   color: var(--color-gray);
   text-align: center;
 }
+
+.time-axis {
+  display: flex;
+  flex-direction: column;
+}
+
+.time-slot-label {
+  height: 30px;
+  position: relative;
+}
+
+.time-slot-label .label-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  color: var(--color-text);
+  padding-right: 0.5rem;
+  white-space: nowrap;
+}
+
+.time-slot-label.half-hour .label-text {
+  display: none;
+}
