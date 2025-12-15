@@ -15,6 +15,14 @@
   --color-dark-green: #3d3929;
   --color-purple-hover: #d5d4df;
 
+  /* Heatmap (derived from --color-primary) */
+  --heat-0: var(--color-light-gray-picker); /* 0 available */
+  --heat-1: #f6ded4; /* very light */
+  --heat-2: #edbfae;
+  --heat-3: #e19b7e;
+  --heat-4: #da7756; /* primary */
+  --heat-5: #bd5d3a; /* primary dark */
+
   /* For picker */
   --color-bg-picker: #f5f5f5;
   --color-text-picker: #333;

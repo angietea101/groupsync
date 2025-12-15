@@ -64,18 +64,6 @@ const GroupAvailabilityView = ({
 
   const maxParticipants = participants.length || 1;
 
-  const getHeatmapColor = (count) => {
-    if (count === 0) return 'var(--color-light-gray-picker)';
-
-    const intensity = count / maxParticipants;
-
-    if (intensity === 1) return 'var(--color-primary)';
-    if (intensity >= 0.75) return '#D98E75';
-    if (intensity >= 0.5) return '#D49C87';
-    if (intensity >= 0.25) return '#DDAC9C';
-    return '#FCE4DC';
-  };
-
   const TimeAxis = useMemo(
     () => (
       <div className="time-axis">
@@ -113,8 +101,19 @@ const GroupAvailabilityView = ({
     // Relative luminance formula
     const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
 
-    // Light background → black text, dark background → white text
     return luminance > 0.6 ? '#000' : '#fff';
+  };
+
+  const getHeatmapColor = (count) => {
+    if (count === 0) return 'var(--heat-0)';
+
+    const intensity = count / maxParticipants;
+
+    if (intensity >= 0.9) return 'var(--heat-5)';
+    if (intensity >= 0.7) return 'var(--heat-4)';
+    if (intensity >= 0.5) return 'var(--heat-3)';
+    if (intensity >= 0.3) return 'var(--heat-2)';
+    return 'var(--heat-1)';
   };
 
   return (
@@ -167,11 +166,11 @@ const GroupAvailabilityView = ({
         <div className="heatmap-legend">
           <span className="legend-label">Fewer</span>
           <div className="legend-gradient">
-            <div style={{ backgroundColor: '#FCE4DC' }} />
-            <div style={{ backgroundColor: '#DDAC9C' }} />
-            <div style={{ backgroundColor: '#D49C87' }} />
-            <div style={{ backgroundColor: '#D98E75' }} />
-            <div style={{ backgroundColor: '#da7756' }} />
+            <div style={{ backgroundColor: 'var(--heat-1)' }} />
+            <div style={{ backgroundColor: 'var(--heat-2)' }} />
+            <div style={{ backgroundColor: 'var(--heat-3)' }} />
+            <div style={{ backgroundColor: 'var(--heat-4)' }} />
+            <div style={{ backgroundColor: 'var(--heat-5)' }} />
           </div>
           <span className="legend-label">More</span>
         </div>

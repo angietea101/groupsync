@@ -23,6 +23,7 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  box-shadow: inset 0 0 0 1px rgba(61, 57, 41, 0.15);
 }
 .group-time-slot.empty {
   opacity: 0.6;
