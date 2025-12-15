@@ -32,9 +32,13 @@ export default function ViewPlans() {
     fetchEvents();
   }, [user]);
 
+  const parseLocalDate = (dateStr) => {
+    const [year, month, day] = dateStr.split('-');
+    return new Date(year, month - 1, day); // month is 0-indexed
+  };
+
   const processEvents = (events) => {
     const today = new Date();
-
     today.setHours(0, 0, 0, 0);
 
     const current = [];
@@ -45,7 +49,7 @@ export default function ViewPlans() {
 
       if (event.dates && event.dates.length > 0) {
         const sortedDates = [...event.dates].sort();
-        endDate = new Date(sortedDates[sortedDates.length - 1]);
+        endDate = parseLocalDate(sortedDates[sortedDates.length - 1]);
       }
 
       if (endDate && endDate < today) {
@@ -62,8 +66,8 @@ export default function ViewPlans() {
   const formatDateRange = (dates) => {
     if (!dates || dates.length === 0) return 'TBD';
     const sorted = [...dates].sort();
-    const start = new Date(sorted[0]);
-    const end = new Date(sorted[sorted.length - 1]);
+    const start = parseLocalDate(sorted[0]);
+    const end = parseLocalDate(sorted[sorted.length - 1]);
 
     const options = { month: 'long', day: 'numeric' };
 
