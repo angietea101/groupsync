@@ -58,14 +58,6 @@ export default function ViewPlans() {
     setCurrentPlans(current);
     setPastPlans(past);
   };
-  const handleLogout = async () => {
-    try {
-      await auth.signOut();
-      navigate('/signin'); // redirect after logout
-    } catch (err) {
-      console.error('Logout error:', err);
-    }
-  };
 
   const formatDateRange = (dates) => {
     if (!dates || dates.length === 0) return 'TBD';
@@ -94,23 +86,6 @@ export default function ViewPlans() {
   return (
     <>
       <Navbar />
-      <button
-        onClick={handleLogout}
-        style={{
-          display: 'flex',
-          marginTop: '20px',
-          padding: '10px 16px',
-          borderRadius: '8px',
-          background: 'var(--color-primary)',
-          color: 'white',
-          border: 'none',
-          cursor: 'pointer',
-          fontSize: '16px',
-          marginLeft: '15px',
-        }}
-      >
-        Log Out
-      </button>
       <div className="plans-page">
         {/* Toggle Buttons */}
         <div className="plans-toggle">

@@ -99,6 +99,126 @@ button {
   font-size: var(--font-md);
 }
 
+.dropdown-container {
+  position: relative; 
+  display: inline-flex;
+  align-items: center;
+}
+.avatar-button {
+  width: 44px;
+  height: 44px;
+  min-width: 44px; 
+  min-height: 44px;
+  border-radius: 50%;
+  background: var(--color-primary); 
+  border: 2px solid transparent; 
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.avatar-initials {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem; 
+  letter-spacing: 0.5px;
+}
+
+/* The Dropdown Card */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 1rem); 
+  right: 0;
+  left: auto;
+  width: 240px; 
+  background-color: var(--color-primary-light);
+  border-radius: 12px;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0,0,0,0.05); 
+  padding: 8px;
+  transform-origin: top right;
+  animation: dropdownFadeIn 0.2s ease-out forwards;
+  z-index: 1001;
+}
+
+/* Header Section */
+.dropdown-header {
+  padding: 12px 16px;
+  margin-bottom: 4px;
+}
+
+.dropdown-name {
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-email {
+  color: #6b7280;
+  font-size: 0.8rem;
+  margin: 2px 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: #c3c3c2;
+  margin: 6px 0;
+}
+
+/* Items (Links/Buttons) */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.logout-item {
+  color: #dc2626;
+}
+
+.logout-item:hover {
+  background-color: #fef2f2; 
+  color: #dc2626;
+}
+
+/* Animation */
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
 .mobile-menu-icon {
   display: none;
   cursor: pointer;
@@ -127,7 +247,7 @@ button {
 }
 
 .mobile-menu.active {
-  max-height: 400px;
+  max-height: 600px;
   opacity: 1;
   padding: 1.5rem var(--space-xxl);
 }
@@ -164,9 +284,11 @@ button {
 .mobile-links a:hover {
   color: var(--color-primary);
 }
+
 .mobile-links a:hover::after {
   width: 100%;
 }
+
 .mobile-auth {
   display: flex;
   flex-direction: column;
@@ -210,6 +332,95 @@ button {
   width: 100%;
   padding: 12px;
 }
+
+/* Mobile User Row (Compact) */
+.mobile-user-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem;
+  background-color: var(--color-bg);
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.mobile-user-info-compact {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.mobile-avatar-small {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mobile-avatar-small .avatar-initials {
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.mobile-user-details-compact {
+  flex: 1;
+  min-width: 0;
+}
+
+.mobile-user-name {
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-user-email {
+  color: #6b7280;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+/* Mobile Logout Button (Compact) */
+.mobile-logout-compact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  color: #dc2626;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+  font-weight: 500;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.mobile-logout-compact:hover {
+  background-color: #fef2f2;
+}
+
+.mobile-logout-compact:hover {
+  background-color: #fef2f2;
+}
+
 @media (min-width: 931px) {
   .mobile-menu {
     display: none;
