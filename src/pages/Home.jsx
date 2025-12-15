@@ -111,10 +111,7 @@ export default function Home() {
               <Share2 className="feature-icon" size={40} strokeWidth={1.5} />
             </div>
             <h3>Easy Sharing</h3>
-            <p>
-              Send invite links instantly. No accounts needed for participants — just like
-              when2meet, but better.
-            </p>
+            <p>Send invite links instantly. No accounts needed for participants.</p>
           </div>
         </div>
       </section>
@@ -130,10 +127,7 @@ export default function Home() {
           <div className="feature-item reveal animate-slide-in-left animation-delay-300">
             <div className="works-icon">1</div>
             <h3>Create Event</h3>
-            <p>
-              Set up your event with dates and times. Add a description and any initial activity
-              ideas.
-            </p>
+            <p>Set up your event with dates. Add a description and any initial activity ideas.</p>
             <div className="works-outer-rect hover-lift">
               <div className="works-inner-rect">
                 <img src={PlusIcon} alt="Icon" className="works-rect-icon" />
@@ -157,7 +151,7 @@ export default function Home() {
           <div className="feature-item reveal animate-slide-in-right animation-delay-600">
             <div className="works-icon">3</div>
             <h3>Vote & Plan</h3>
-            <p>Everyone votes on activities and times. The best option wins automatically.</p>
+            <p>Everyone votes on activities. The best option wins automatically.</p>
             <div className="works-outer-rect hover-lift">
               <div className="works-inner-rect">
                 <img src={CheckmarkIcon} alt="Icon" className="works-rect-icon" />
