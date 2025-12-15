@@ -1,19 +1,18 @@
 @import '../styles/variables.css';
 
 .about-container {
-  min-height: 100vh;
-  background-color: var(--color-bg);
   overflow-x: hidden;
 }
 
 /* Hero Section */
 .about-hero {
-  min-height: 60vh;
+  min-height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4rem 2rem;
+  padding: var(--space-xxl) var(--space-xl);
+  width: 100%;
   background-color: var(--color-bg);
 }
 
@@ -232,7 +231,9 @@
 
 /* Hover Effects */
 .hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   cursor: pointer;
 }
 

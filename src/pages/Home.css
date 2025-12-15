@@ -126,23 +126,6 @@
   flex-direction: column;
 }
 
-/* NAVBAR */
-.navbar {
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 var(--space-xxl);
-  background-color: var(--color-bg);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-}
-
-.navbar-left {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 .logo {
   width: 40px;
   height: 40px;

@@ -4,7 +4,6 @@ import './Team.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-// Import your SVG icons
 import GithubIcon from '../assets/github-icon.svg';
 import FirebaseIcon from '../assets/firebase-icon.svg';
 import FigmaIcon from '../assets/figma-icon.svg';
