@@ -422,8 +422,10 @@ export default function PlanEvent() {
           </div>
 
           <div className="activity-poll-section">
-            <h3>Activity Poll</h3>
-            {/* The 'activities' state will now hold the fetched data */}
+            <div className="availability-header">
+              <h3>Activity Poll</h3>
+            </div>
+
             <AnimatePresence>
               {activities.map((activity) => {
                 const isVoted = activity.votes.includes(currentUserName);
