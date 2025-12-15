@@ -5,6 +5,7 @@ import CreateAccount from '../pages/CreateAccount';
 import ViewPlans from '../pages/ViewPlans';
 import PlanEvent from '../pages/PlanEvent';
 import CreatePlan from '../pages/CreatePlan';
+import Team from '../pages/Team';
 
 import ScrollToHash from '../components/ScrollToHash';
 
@@ -14,6 +15,7 @@ export default function AppRoutes() {
       <ScrollToHash />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/team" element={<Team />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/createaccount" element={<CreateAccount />} />
         <Route path="/viewplans" element={<ViewPlans />} />

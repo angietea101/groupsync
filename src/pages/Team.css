@@ -1,0 +1,268 @@
+@import '../styles/variables.css';
+
+.about-container {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.about-hero {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  background-color: var(--color-bg);
+}
+
+.about-hero h1 {
+  font-size: var(--font-xxl);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.about-hero p {
+  font-size: var(--font-lg);
+  color: var(--color-text-light);
+  max-width: 650px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Team Section */
+.about-team-section {
+  padding: var(--space-xxxl) var(--space-xl);
+  background-color: var(--color-primary-light);
+  width: 100%;
+}
+
+.about-team-section h2,
+.about-tools-section h2,
+.about-journey-section h2 {
+  font-size: var(--font-xxl);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--color-text);
+}
+
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.team-card {
+  flex: 0 1 calc(33.333% - var(--space-xl));
+  min-width: 280px;
+  max-width: 350px;
+  background-color: var(--color-white);
+  padding: var(--space-xl);
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.member-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.team-card h3 {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.member-role {
+  font-size: var(--font-md);
+  font-weight: 500;
+  color: var(--color-primary-dark);
+  margin-bottom: 1rem;
+}
+
+.member-description {
+  font-size: var(--font-sm);
+  color: var(--color-text-light);
+  line-height: 1.6;
+}
+
+/* Tools Section */
+.about-tools-section {
+  padding: var(--space-xxxl) var(--space-xl);
+  background-color: var(--color-bg);
+  width: 100%;
+}
+
+.tools-subtitle {
+  font-size: var(--font-md);
+  color: var(--color-text-light);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+}
+
+.tools-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-xl);
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.tool-card {
+  background-color: var(--color-white);
+  padding: var(--space-xl);
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.tool-icon-container {
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tool-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.tool-card h3 {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.tool-card p {
+  font-size: var(--font-sm);
+  color: var(--color-text-light);
+}
+
+/* Journey Section */
+.about-journey-section {
+  padding: var(--space-xxxl) var(--space-xl);
+  background-color: var(--color-primary-light);
+  width: 100%;
+}
+
+.journey-subtitle {
+  font-size: var(--font-md);
+  color: var(--color-text-light);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+}
+
+.milestones-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.milestone-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-white);
+  padding: var(--space-xl);
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  gap: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.milestone-number {
+  width: 60px;
+  height: 60px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-white);
+  flex-shrink: 0;
+}
+
+.milestone-content {
+  flex: 1;
+}
+
+.milestone-content h3 {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.milestone-content p {
+  font-size: var(--font-sm);
+  color: var(--color-text-light);
+  line-height: 1.6;
+}
+
+/* Hover Effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.hover-lift:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .about-hero h1 {
+    font-size: var(--font-xl);
+  }
+
+  .about-hero p {
+    font-size: var(--font-md);
+  }
+
+  .team-grid,
+  .tools-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .milestone-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .milestone-number {
+    margin-bottom: 1rem;
+  }
+}
