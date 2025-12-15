@@ -152,6 +152,12 @@ h1 {
   max-width: 50%;
 }
 
+.activity-poll-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .availability-scroll-wrapper {
   width: 100%;
   max-width: 100%;
