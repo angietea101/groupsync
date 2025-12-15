@@ -119,46 +119,48 @@ const GroupAvailabilityView = ({
   return (
     <div className="group-availability-wrapper">
       <div className="group-availability-card">
-        <div className="picker-container">
-          <div className="day-header-row">
-            <div className="day-header empty-cell">Time</div>
-            {dates.map((date) => (
-              <div key={date} className="day-header">
-                <span className="day-name">{formatDayName(date)}</span>
-                <span className="date-number">{moment(date).format('D')}</span>
-              </div>
-            ))}
-          </div>
+        <div className="group-availability-scroll">
+          <div className="picker-container">
+            <div className="day-header-row">
+              <div className="day-header empty-cell">Time</div>
+              {dates.map((date) => (
+                <div key={date} className="day-header">
+                  <span className="day-name">{formatDayName(date)}</span>
+                  <span className="date-number">{moment(date).format('D')}</span>
+                </div>
+              ))}
+            </div>
 
-          {/* Calendar Grid */}
-          <div className="calendar-grid">
-            {TimeAxis}
-            {dates.map((date) => (
-              <div key={date} className="date-column">
-                {timeSlots.map((slot) => {
-                  const count = getSlotCount[date]?.[slot] || 0;
-                  const backgroundColor = getHeatmapColor(count);
+            {/* Calendar Grid */}
+            <div className="calendar-grid">
+              {TimeAxis}
+              {dates.map((date) => (
+                <div key={date} className="date-column">
+                  {timeSlots.map((slot) => {
+                    const count = getSlotCount[date]?.[slot] || 0;
+                    const backgroundColor = getHeatmapColor(count);
 
-                  return (
-                    <div
-                      key={slot}
-                      className={`group-time-slot ${count === 0 ? 'empty' : ''}`}
-                      style={{ backgroundColor }}
-                      title={`${count} / ${maxParticipants} available`}
-                    >
-                      {count > 0 && (
-                        <span
-                          className="slot-count"
-                          style={{ color: getContrastTextColor(backgroundColor) }}
-                        >
-                          {count}
-                        </span>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
+                    return (
+                      <div
+                        key={slot}
+                        className={`group-time-slot ${count === 0 ? 'empty' : ''}`}
+                        style={{ backgroundColor }}
+                        title={`${count} / ${maxParticipants} available`}
+                      >
+                        {count > 0 && (
+                          <span
+                            className="slot-count"
+                            style={{ color: getContrastTextColor(backgroundColor) }}
+                          >
+                            {count}
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

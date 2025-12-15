@@ -70,7 +70,7 @@ const AvailabilityPicker = ({
         });
       }
 
-     const newState = {
+      const newState = {
         ...prev,
       };
 
@@ -135,7 +135,7 @@ const AvailabilityPicker = ({
   const handleMouseUp = useCallback(() => {
     if (isDragging) {
       setIsDragging(false);
-      
+
       if (onSave) {
         onSave(availability);
       }
@@ -173,35 +173,37 @@ const AvailabilityPicker = ({
   return (
     <div className="availability-picker-wrapper">
       <div className="availability-picker-card">
-        <div className="picker-container">
-          <div className="day-header-row">
-            <div className="day-header empty-cell">Time</div>
-            {dates.map((date) => (
-              <div key={date} className="day-header">
-                <span className="day-name">{formatDayName(date)}</span>
-                <span className="date-number">{moment(date).format('D')}</span>
-              </div>
-            ))}
-          </div>
+        <div className="availability-scroll">
+          <div className="picker-container">
+            <div className="day-header-row">
+              <div className="day-header empty-cell">Time</div>
+              {dates.map((date) => (
+                <div key={date} className="day-header">
+                  <span className="day-name">{formatDayName(date)}</span>
+                  <span className="date-number">{moment(date).format('D')}</span>
+                </div>
+              ))}
+            </div>
 
-          {/* Calendar Grid */}
-          <div className="calendar-grid">
-            {TimeAxis}
-            {dates.map((date) => (
-              <div key={date} className="date-column">
-                {timeSlots.map((slot) => {
-                  const isSelected = isSlotSelected(date, slot);
-                  return (
-                    <div
-                      key={slot}
-                      className={`time-slot ${isSelected ? 'selected' : 'unselected'}`}
-                      onMouseDown={() => handleMouseDown(date, slot)}
-                      onMouseEnter={() => handleMouseEnter(date, slot)}
-                    />
-                  );
-                })}
-              </div>
-            ))}
+            {/* Calendar Grid */}
+            <div className="calendar-grid">
+              {TimeAxis}
+              {dates.map((date) => (
+                <div key={date} className="date-column">
+                  {timeSlots.map((slot) => {
+                    const isSelected = isSlotSelected(date, slot);
+                    return (
+                      <div
+                        key={slot}
+                        className={`time-slot ${isSelected ? 'selected' : 'unselected'}`}
+                        onMouseDown={() => handleMouseDown(date, slot)}
+                        onMouseEnter={() => handleMouseEnter(date, slot)}
+                      />
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

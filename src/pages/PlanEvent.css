@@ -4,10 +4,14 @@
 
 /* --- PAGE BASE --- */
 .createevent-page {
-  margin: var(--space-lg) var(--space-xxxxl);
-  background: var(--color-bg);
+  margin-block: var(--space-lg);
+  margin-inline: auto;
+
+  padding-inline: clamp(1.25rem, 8vw, 10rem);
+  max-width: 1600px;
+
+  background: var(--color-primary-light);
   color: var(--color-text);
-  background-color: var(--color-primary-light);
 }
 
 /* --- HEADER --- */
@@ -137,17 +141,22 @@ h1 {
 .createevent-body {
   display: flex;
   justify-content: space-between;
-  gap: var(--space-lg);
+  gap: var(--space-xl);
   width: 100%;
   flex-wrap: wrap; /* allow stacking */
 }
 
 .availability-section,
 .activity-poll-section {
-  flex: 1 1 300px; /* grow/shrink, min width 300px */
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
+  flex: 1 1 0;
+  max-width: 50%;
+}
+
+.availability-scroll-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .availability-header {
@@ -372,9 +381,9 @@ h3 {
 }
 
 /* --- MEDIA QUERIES --- */
-@media (max-width: 1300px) {
+@media (max-width: 1000px) {
   .createevent-page {
-    margin: var(--space-lg) var(--space-xxxl);
+    margin: var(--space-lg) var(--space-xl);
   }
 
   .createevent-body {
@@ -391,11 +400,17 @@ h3 {
   .invite-button {
     width: 100%;
   }
+
+  .availability-section,
+  .activity-poll-section {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 700px) {
   .createevent-page {
-    margin: var(--space-lg) var(--space-xl);
+    margin: var(--space-lg) var(--space-sm);
   }
 }
 

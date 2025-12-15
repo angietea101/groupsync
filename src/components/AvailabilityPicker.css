@@ -1,8 +1,12 @@
 .availability-picker-wrapper {
-  font-family: 'Merriweather', serif;
-  width: 100%;
   margin: 0;
-  overflow-x: auto; /* horizontal scroll if too many dates */
+  width: 100%;
+  max-width: 100%;
+}
+
+.availability-scroll {
+  overflow-x: auto;
+  width: 100%;
 }
 
 .availability-picker-card {
@@ -16,10 +20,8 @@
 }
 
 .picker-container {
-  display: flex;
-  flex-direction: column;
-  border-radius: 4px;
-  overflow: hidden;
+  width: max-content;
+  min-width: 100%;
 }
 
 .day-header-row {

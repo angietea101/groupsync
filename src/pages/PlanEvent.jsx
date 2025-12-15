@@ -401,22 +401,24 @@ export default function PlanEvent() {
               </button>
             </div>
 
-            {viewMode === 'edit' ? (
-              <AvailabilityPicker
-                dates={event.dates}
-                startTime={9}
-                endTime={20.5}
-                initialAvailability={myAvailability}
-                onSave={handleAvailabilitySave}
-              />
-            ) : (
-              <GroupAvailabilityView
-                dates={event.dates}
-                startTime={9}
-                endTime={20.5}
-                participants={participants}
-              />
-            )}
+            <div className="availability-scroll-wrapper">
+              {viewMode === 'edit' ? (
+                <AvailabilityPicker
+                  dates={event.dates}
+                  startTime={9}
+                  endTime={20.5}
+                  initialAvailability={myAvailability}
+                  onSave={handleAvailabilitySave}
+                />
+              ) : (
+                <GroupAvailabilityView
+                  dates={event.dates}
+                  startTime={9}
+                  endTime={20.5}
+                  participants={participants}
+                />
+              )}
+            </div>
           </div>
 
           <div className="activity-poll-section">
