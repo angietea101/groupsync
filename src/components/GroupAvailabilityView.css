@@ -31,7 +31,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
   box-shadow: inset 0 0 0 1px rgba(61, 57, 41, 0.15);
 }
 .group-time-slot.empty {
@@ -40,7 +42,6 @@
 
 .group-time-slot:hover {
   box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3);
-  transform: scale(1.02);
   z-index: 10;
 }
 
