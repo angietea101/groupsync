@@ -67,6 +67,15 @@ export default function ViewPlans() {
       }
     });
 
+    const sortByCreatedAt = (a, b) => {
+      const dateA = a.createdAt?.toDate?.() || a.createdAt || new Date(0);
+      const dateB = b.createdAt?.toDate?.() || b.createdAt || new Date(0);
+      return dateB - dateA;
+    };
+
+    current.sort(sortByCreatedAt);
+    past.sort(sortByCreatedAt);
+
     setCurrentPlans(current);
     setPastPlans(past);
   };
