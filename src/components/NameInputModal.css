@@ -20,7 +20,6 @@
   border: 1px solid var(--color-light-gray-picker);
 }
 
-/* Animation stays the same */
 @keyframes slideUp {
   from {
     opacity: 0;
