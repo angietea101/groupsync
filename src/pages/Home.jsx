@@ -69,7 +69,10 @@ export default function Home() {
           >
             Start Planning
           </button>
-          <button className="reveal animate-slide-in-right watch-demo">
+          <button
+            className="reveal animate-slide-in-right watch-demo"
+            onClick={() => window.open('https://youtu.be/razxSHQEtDA', '_blank')}
+          >
             <img src={WatchIcon} alt="Watch icon" className="watch-icon" />
             Watch Demo
           </button>
