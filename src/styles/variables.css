@@ -3,6 +3,7 @@
 ----------------------------------------- */
 :root {
   --radius-btn: 12px;
+  --navbar-height: 72px;
 
   /* Brand Colors */
   --color-primary: #da7756;

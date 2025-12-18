@@ -1,29 +1,16 @@
 /* Page wrapper */
 .createplan-page {
-  position: relative;
-  padding-left: clamp(1rem, 6vw, 3rem);
-  padding-right: clamp(1rem, 6vw, 3rem);
-  background-color: var(--color-primary-light);
+  padding-top: 72px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
 .createplan-container {
-  min-height: calc(100vh - 72px);
+  margin-block: 2rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-
   flex-direction: column;
-  overflow: visible;
-
-  width: 100%;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-
-  padding: 0;
+  justify-content: center;
 }
 
 /* Main card */
