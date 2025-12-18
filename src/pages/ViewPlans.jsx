@@ -12,29 +12,37 @@ export default function ViewPlans() {
   const [loading, setLoading] = useState(true);
   const [currentPlans, setCurrentPlans] = useState([]);
   const [pastPlans, setPastPlans] = useState([]);
-
-  const user = auth.currentUser;
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      console.log(user);
-      if (user) {
-        try {
-          const events = await getUserEvents(user.uid);
-          console.log(events);
-          processEvents(events);
-        } catch (err) {
-          console.error('Error fetching events: ', err);
-        }
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+
+      if (currentUser) {
+        fetchEvents(currentUser.uid);
+      } else {
+        setLoading(false);
       }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const fetchEvents = async (uid) => {
+    try {
+      const events = await getUserEvents(uid);
+      console.log(events);
+      processEvents(events);
+    } catch (err) {
+      console.error('Error fetching events: ', err);
+    } finally {
       setLoading(false);
-    };
-    fetchEvents();
-  }, [user]);
+    }
+  };
 
   const parseLocalDate = (dateStr) => {
     const [year, month, day] = dateStr.split('-');
-    return new Date(year, month - 1, day); // month is 0-indexed
+    return new Date(year, month - 1, day);
   };
 
   const processEvents = (events) => {
@@ -58,6 +66,15 @@ export default function ViewPlans() {
         current.push(event);
       }
     });
+
+    const sortByCreatedAt = (a, b) => {
+      const dateA = a.createdAt?.toDate?.() || a.createdAt || new Date(0);
+      const dateB = b.createdAt?.toDate?.() || b.createdAt || new Date(0);
+      return dateB - dateA;
+    };
+
+    current.sort(sortByCreatedAt);
+    past.sort(sortByCreatedAt);
 
     setCurrentPlans(current);
     setPastPlans(past);
@@ -85,6 +102,7 @@ export default function ViewPlans() {
   const handleCreatePlan = () => {
     navigate('/createplan');
   };
+
   const plansDisplay = activeTab === 'Current Plans' ? currentPlans : pastPlans;
 
   return (
